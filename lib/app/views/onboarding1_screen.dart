@@ -116,7 +116,7 @@ class IntroScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.Primary,
+                      backgroundColor: AppColors.primary,
                       foregroundColor: AppColors.lightBackground,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
