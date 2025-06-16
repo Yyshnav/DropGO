@@ -6,14 +6,14 @@ class AppTheme {
   static final theme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.lightBackground,
-    primaryColor: AppColors.Primary,
+    primaryColor: AppColors.primary,
     colorScheme: ColorScheme.light(
-      primary: AppColors.Primary,
+      primary: AppColors.primary,
       secondary: AppColors.lightSecondary,
     ),
     textTheme: GoogleFonts.outfitTextTheme().apply(
-      bodyColor: AppColors.white,
-      displayColor: AppColors.white,
+      bodyColor: Colors.black,
+      displayColor: Colors.black,
     ),
     fontFamily: GoogleFonts.outfit().fontFamily,
   );
