@@ -11,10 +11,10 @@ class AppTheme {
       primary: AppColors.Primary,
       secondary: AppColors.lightSecondary,
     ),
-    textTheme: GoogleFonts.poppinsTextTheme().apply(
+    textTheme: GoogleFonts.outfitTextTheme().apply(
       bodyColor: AppColors.white,
       displayColor: AppColors.white,
     ),
-    fontFamily: GoogleFonts.poppins().fontFamily,
+    fontFamily: GoogleFonts.outfit().fontFamily,
   );
 }

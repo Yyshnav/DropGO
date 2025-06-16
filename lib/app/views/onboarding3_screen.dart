@@ -15,12 +15,12 @@ class OnboardingScreen extends StatelessWidget {
             width: screenSize.width,
             height: screenSize.height,
             child: Image.asset(
-              'assets/images/bgimage.png', // your image
+              'assets/images/bgimage.png', // your image path
               fit: BoxFit.cover,
             ),
           ),
 
-          // Dark overlay for focus
+          // Dark overlay
           Container(
             width: screenSize.width,
             height: screenSize.height,
@@ -43,72 +43,80 @@ class OnboardingScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
                 ),
 
-                // Bottom Content Section
+                // Left-aligned Text
                 Positioned(
                   top: screenSize.height * 0.55,
                   left: 20,
-                  right: 20,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Be a Eat Fit Partner",
-                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 28,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         "Get a Stable Monthly\nIncome!",
-                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
-                      const SizedBox(height: 30),
-                      // Page Indicator
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(3, (index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            width: index == 1 ? 20 : 10,
-                            height: 4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: index == 1 ? Colors.white : Colors.white54,
-                            ),
-                          );
-                        }),
-                      ),
-                      const SizedBox(height: 30),
-                      // Get Started Button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF00797D),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          onPressed: () {
-                            // Navigation logic
-                          },
-                          child: const Text(
-                            "Get Started",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
+                    ],
+                  ),
+                ),
+
+                // Page Indicator - center aligned
+                Positioned(
+                  top: screenSize.height * 0.78,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(3, (index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: index == 2 ? 20 : 10,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: index == 2 ? Colors.white : Colors.white54,
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+
+                // Get Started Button - below indicator
+                Positioned(
+                  top: screenSize.height * 0.88,
+                  left: 20,
+                  right: 20,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00797D),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                    ],
+                      onPressed: () {
+                        // Navigation logic
+                      },
+                      child: const Text(
+                        "Get Started",
+                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ],
