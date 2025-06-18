@@ -36,7 +36,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               style: TextStyle(
                 fontSize: Responsive.width(context) * 0.05,
                 fontWeight: FontWeight.bold,
-                color: AppColors.Primary,
+                color: AppColors.primary,
                 letterSpacing: 1.2,
               ),
             ),
@@ -108,7 +108,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   // TODO: password update logic
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.Primary,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.lightBackground,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

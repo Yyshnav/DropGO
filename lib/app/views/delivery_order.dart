@@ -66,7 +66,7 @@ class DropScreen extends StatelessWidget {
             bottomRight: Radius.circular(30),
           ),
         ),
-        backgroundColor: const Color(0xFF006D6D), // teal-like background
+        backgroundColor: AppColors.primary, // teal-like background
         child: SafeArea(
           child: Obx(
             () => Column(
@@ -100,7 +100,7 @@ class DropScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                Responsive.h(context, 1.1),
 
                 // Name and Email
                 const Text(
@@ -239,7 +239,7 @@ class DropScreen extends StatelessWidget {
                             IconButton(
                               icon: const Icon(Icons.call, color: Colors.teal),
                               onPressed: () {
-                                controller.makePhoneCall();
+                                controller.makePhoneCall("+919995518067");
                               },
                             ),
                           ],

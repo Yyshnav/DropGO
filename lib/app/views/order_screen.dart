@@ -60,7 +60,7 @@ class OrderCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
-                color: AppColors.Primary,
+                color: AppColors.primary,
                 borderRadius: BorderRadius.circular(6),
               ),
               child: const Text(

@@ -23,7 +23,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
             children: [
               Icon(
                 Icons.verified,
-                color: AppColors.Primary,
+                color: AppColors.primary,
                 size: screenWidth * 0.15,
               ),
               Responsive.h(context, 2),
@@ -32,7 +32,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: screenWidth * 0.05,
-                  color: AppColors.Primary,
+                  color: AppColors.primary,
                 ),
               ),
               Responsive.h(context, 1.5),
@@ -53,7 +53,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
                     // TODO: Navigate to login screen
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.Primary,
+                    backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.lightBackground,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

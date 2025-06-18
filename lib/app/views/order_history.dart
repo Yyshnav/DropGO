@@ -245,7 +245,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                     Center(
                       child: Text(
                         "No cancelled orders.",
-                        style: TextStyle(color: AppColors.Primary),
+                        style: TextStyle(color: AppColors.primary),
                       ),
                     ),
                   ],

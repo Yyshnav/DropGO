@@ -23,7 +23,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.Primary,
+                color: AppColors.primary,
               ),
             ),
             SizedBox(height: 5),
@@ -36,7 +36,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               "Your Email",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: AppColors.Primary,
+                color: AppColors.primary,
               ),
             ),
             SizedBox(height: 8),
@@ -47,7 +47,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 hintStyle: TextStyle(color: AppColors.txtfldclr),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: AppColors.Primary, width: 1.5),
+                  borderSide: BorderSide(color: AppColors.primary, width: 1.5),
                 ),
               ),
             ),
@@ -58,7 +58,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.Primary,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.lightBackground,
 
                   shape: RoundedRectangleBorder(

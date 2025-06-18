@@ -50,7 +50,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: width * 0.05,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.Primary,
+                      color: AppColors.primary,
                       letterSpacing: 1.2,
                     ),
                   ),
@@ -85,7 +85,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       // Handle save
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.Primary,
+                      backgroundColor: AppColors.primary,
                       foregroundColor: AppColors.lightBackground,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
@@ -124,7 +124,7 @@ class ChangePasswordScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: width * 0.037,
               fontWeight: FontWeight.w600,
-              color: AppColors.Primary,
+              color: AppColors.primary,
             ),
             children: const [
               TextSpan(
@@ -143,12 +143,12 @@ class ChangePasswordScreen extends StatelessWidget {
             hintStyle: TextStyle(fontSize: width * 0.035),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
-              borderSide: const BorderSide(color: AppColors.Primary),
+              borderSide: const BorderSide(color: AppColors.primary),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(
-                color: AppColors.Primary,
+                color: AppColors.primary,
                 width: 2.5,
               ),
             ),
