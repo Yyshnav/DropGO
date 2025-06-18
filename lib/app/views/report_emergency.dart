@@ -92,65 +92,133 @@ class ReportEmergencyScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: emergencyTypes.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 0.8,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 12,
-              ),
-              itemBuilder: (context, index) {
-                final type = emergencyTypes[index];
-                return Obx(() {
-                  final selected =
-                      controller.selectedType.value == type['label'];
+            Obx(() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      _buildEmergencyCard(
+        icon: Icons.local_police,
+        label: 'Call 999',
+        selected: controller.selectedType.value == 'Call 999',
+        onTap: () => controller.selectEmergency('Call 999'),
+      ),
+      _buildEmergencyCard(
+        icon: Icons.admin_panel_settings,
+        label: 'Contact Admin',
+        selected: controller.selectedType.value == 'Contact Admin',
+        onTap: () => controller.selectEmergency('Contact Admin'),
+      ),
+    ],
+  );
+}),
 
-                  return GestureDetector(
-                    // onTap: () => controller.changeEmergencyType(type['label']),
-                    onTap: () => controller.selectEmergency(type['label']),
+            // GridView.builder(
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   shrinkWrap: true,
+            //   itemCount: emergencyTypes.length,
+            //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            //     crossAxisCount: 4,
+            //     childAspectRatio: 0.8,
+            //     crossAxisSpacing: 8,
+            //     mainAxisSpacing: 12,
+            //   ),
+            //   itemBuilder: (context, index) {
+            //     final type = emergencyTypes[index];
+            //     return Obx(() {
+            //       final selected =
+            //           controller.selectedType.value == type['label'];
 
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: selected
-                                ? AppColors.primary
-                                : const Color.fromARGB(255, 233, 233, 233),
-                            borderRadius: BorderRadius.circular(14),
-                            border: selected
-                                ? Border.all(color: AppColors.primary, width: 2)
-                                : null,
-                          ),
-                          padding: const EdgeInsets.all(16),
-                          child: Icon(
-                            type['icon'],
-                            size: 28,
-                            color: selected ? Colors.white : Colors.black45,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          type['label'],
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: selected
-                                ? Colors.black
-                                : Colors.grey.shade700,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
-              },
-            ),
+            //       return GestureDetector(
+            //         // onTap: () => controller.changeEmergencyType(type['label']),
+            //         onTap: () => controller.selectEmergency(type['label']),
+
+            //         child: Column(
+            //           children: [
+            //             Container(
+            //               decoration: BoxDecoration(
+            //                 color: selected
+            //                     ? AppColors.primary
+            //                     : const Color.fromARGB(255, 233, 233, 233),
+            //                 borderRadius: BorderRadius.circular(14),
+            //                 border: selected
+            //                     ? Border.all(color: AppColors.primary, width: 2)
+            //                     : null,
+            //               ),
+            //               padding: const EdgeInsets.all(16),
+            //               child: Icon(
+            //                 type['icon'],
+            //                 size: 28,
+            //                 color: selected ? Colors.white : Colors.black45,
+            //               ),
+            //             ),
+            //             const SizedBox(height: 4),
+            //             Text(
+            //               type['label'],
+            //               style: TextStyle(
+            //                 fontSize: 12,
+            //                 color: selected
+            //                     ? Colors.black
+            //                     : Colors.grey.shade700,
+            //                 fontWeight: FontWeight.w500,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       );
+            //     });
+            //   },
+            // ),
           ],
         ),
       ),
     );
   }
+
+Widget _buildEmergencyCard({
+  required IconData icon,
+  required String label,
+  required VoidCallback onTap,
+  required bool selected,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      children: [
+        Container(
+          width: MediaQuery.of(Get.context!).size.width * 1/2.5,
+          height: MediaQuery.of(Get.context!).size.width * 1/3.5,
+          decoration: BoxDecoration(
+            color: selected
+                ? AppColors.primary
+                : const Color.fromARGB(255, 233, 233, 233),
+            borderRadius: BorderRadius.circular(14),
+            border: selected
+                ? Border.all(color: AppColors.primary, width: 2)
+                : null,
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Icon(
+            icon,
+            size: 40,
+            color: selected ? Colors.white : Colors.black45,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: selected ? Colors.black : Colors.grey.shade700,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  );
 }
+
+
+}
+
+
+
