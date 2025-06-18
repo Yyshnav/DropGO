@@ -1,6 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:typed_data';
@@ -11,7 +11,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:html/parser.dart' show parse;
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LocationController extends GetxController {
   final String phoneNumber = '+919995518067';
@@ -46,19 +47,16 @@ class LocationController extends GetxController {
     super.onClose();
   }
 
-  Future<void> makePhoneCall() async {
-    try {
-      PermissionStatus status = await Permission.phone.request();
-      if (status.isGranted) {
-        bool? res = await FlutterPhoneDirectCaller.callNumber(phoneNumber);
-        if (res == true) {
-        } else {}
-      } else {}
-    } catch (e) {
-      // print('Error initiating call: $e');
-    }
-  }
+Future<void> makePhoneCall(String phoneNumber) async {
+  final Uri uri = Uri(scheme: 'tel', path: phoneNumber);
 
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    throw 'Could not launch $uri';
+  }
+}
+  
   Future<void> _loadVehicleIcon() async {
     try {
       if (Get.context == null) {
