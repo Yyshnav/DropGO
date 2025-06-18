@@ -7,9 +7,9 @@ class DottedContainerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.Primary,
+      backgroundColor: AppColors.primary,
       appBar: AppBar(
-        backgroundColor: AppColors.Primary,
+        backgroundColor: AppColors.primary,
         elevation: 0,
         title: const Text(
           "Agreement",
@@ -134,7 +134,6 @@ class BulletPoint extends StatelessWidget {
 class SimpleDottedBorder extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    
     const double dashWidth = 5;
     const double dashSpace = 3;
     final paint = Paint()

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'DineTime',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: AppRoutes.orderhistory,
+      initialRoute: AppRoutes.feedback,
       getPages: AppRoutes.routes,
     );
   }

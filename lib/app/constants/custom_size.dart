@@ -7,7 +7,6 @@ class Responsive {
   static double width(BuildContext context) =>
       MediaQuery.of(context).size.width;
 
-  // Use these for spacing
   static SizedBox h(BuildContext context, double percent) =>
       SizedBox(height: height(context) * percent / 100);
 

@@ -54,7 +54,7 @@ class EditProfilescreen extends StatelessWidget {
                                 child: Icon(
                                   Icons.edit,
                                   size: 16,
-                                  color: AppColors.Primary,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ),
@@ -70,7 +70,7 @@ class EditProfilescreen extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: size.width * 0.05,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.Primary,
+                                color: AppColors.primary,
                               ),
                             ),
                             Text(
@@ -85,7 +85,7 @@ class EditProfilescreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: size.height * 0.02),
-                    Divider(height: 1, color: AppColors.Primary),
+                    Divider(height: 1, color: AppColors.primary),
                     SizedBox(height: size.height * 0.015),
                     buildProfileTile("NAME", "VAISHNAV A", size),
                     buildProfileTile("EMAIL", "vaishnav@gmail.com", size),
@@ -97,7 +97,7 @@ class EditProfilescreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.Primary,
+                            backgroundColor: AppColors.primary,
                             foregroundColor: AppColors.lightBackground,
                             padding: EdgeInsets.symmetric(
                               vertical: size.height * 0.018,
@@ -135,7 +135,7 @@ class EditProfilescreen extends StatelessWidget {
         style: TextStyle(
           fontSize: size.width * 0.04,
           fontWeight: FontWeight.bold,
-          color: AppColors.Primary,
+          color: AppColors.primary,
         ),
       ),
       trailing: Text(value, style: TextStyle(fontSize: size.width * 0.037)),

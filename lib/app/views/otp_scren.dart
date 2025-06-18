@@ -29,7 +29,7 @@ class VerifyCodeScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: Responsive.width(context) * 0.05,
                 fontWeight: FontWeight.bold,
-                color: AppColors.Primary,
+                color: AppColors.primary,
               ),
             ),
             Responsive.h(context, 1),
@@ -73,7 +73,7 @@ class VerifyCodeScreen extends StatelessWidget {
                     maxLength: 1,
                     style: TextStyle(
                       fontSize: fieldSize * 0.5,
-                      color: AppColors.Primary,
+                      color: AppColors.primary,
                     ),
                     onChanged: (value) {
                       if (value.isNotEmpty &&
@@ -87,7 +87,7 @@ class VerifyCodeScreen extends StatelessWidget {
                       counterText: '',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(color: AppColors.Primary),
+                        borderSide: BorderSide(color: AppColors.primary),
                       ),
                     ),
                   ),
@@ -103,7 +103,7 @@ class VerifyCodeScreen extends StatelessWidget {
                   // TODO: Submit code logic
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.Primary,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.lightBackground,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -111,9 +111,7 @@ class VerifyCodeScreen extends StatelessWidget {
                 ),
                 child: Text(
                   "Verify Code",
-                  style: TextStyle(
-                    fontSize: Responsive.width(context) * 0.045,
-                  ),
+                  style: TextStyle(fontSize: Responsive.width(context) * 0.045),
                 ),
               ),
             ),
@@ -131,7 +129,7 @@ class VerifyCodeScreen extends StatelessWidget {
                       text: "Resend link",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.Primary,
+                        color: AppColors.primary,
                       ),
                     ),
                   ],

@@ -20,13 +20,16 @@ class LocationController extends GetxController {
   late GoogleMapController _mapController;
   final polylineCoordinates = <LatLng>[].obs;
   var isVehicleIconLoaded = false.obs;
-  final navigationSteps = <Map<String, dynamic>>[].obs; // Store turn-by-turn steps
+  final navigationSteps =
+      <Map<String, dynamic>>[].obs; // Store turn-by-turn steps
 
   final deliveryPosition = const LatLng(11.194716, 75.800501);
   final String googleApiKey = "AIzaSyCI_JG6kQjOnZnNauPmxuv-3YOL8D5ILhs";
 
-  BitmapDescriptor vehicleIcon = BitmapDescriptor.defaultMarker; // Default fallback
-  StreamSubscription<Position>? _positionStreamSubscription; // Store stream subscription
+  BitmapDescriptor vehicleIcon =
+      BitmapDescriptor.defaultMarker; // Default fallback
+  StreamSubscription<Position>?
+  _positionStreamSubscription; // Store stream subscription
   DateTime? _lastRouteUpdate; // For debouncing route updates
 
   @override
@@ -49,15 +52,13 @@ class LocationController extends GetxController {
       if (status.isGranted) {
         bool? res = await FlutterPhoneDirectCaller.callNumber(phoneNumber);
         if (res == true) {
-        } else {
-        }
-      } else {
-      }
+        } else {}
+      } else {}
     } catch (e) {
       // print('Error initiating call: $e');
     }
   }
-  
+
   Future<void> _loadVehicleIcon() async {
     try {
       if (Get.context == null) {
@@ -66,7 +67,9 @@ class LocationController extends GetxController {
 
       const assetPath = 'assets/images/boy.png';
       // print('Attempting to load asset: $assetPath');
-      final ByteData data = await DefaultAssetBundle.of(Get.context!).load(assetPath);
+      final ByteData data = await DefaultAssetBundle.of(
+        Get.context!,
+      ).load(assetPath);
       final Uint8List bytes = data.buffer.asUint8List();
       // print('Asset loaded, bytes length: ${bytes.length}');
 
@@ -113,25 +116,34 @@ class LocationController extends GetxController {
       }
 
       // Initial position fetch
-      Position position = await Geolocator.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      Position position = await Geolocator.getCurrentPosition(
+        locationSettings: LocationSettings(accuracy: LocationAccuracy.high),
+      );
       //   desiredAccuracy: LocationAccuracy.high,
-      
+
       currentPosition.value = LatLng(position.latitude, position.longitude);
       getPolylineRoute(); // Initial route fetch
 
       // Start real-time location updates
-      _positionStreamSubscription = Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.high,
-          distanceFilter: 10, // Update every 10 meters
-        ),
-      ).listen((Position position) {
-        currentPosition.value = LatLng(position.latitude, position.longitude);
-        // print('Updated current position: ${currentPosition.value}');
-        _debouncedGetPolylineRoute();
-      }, onError: (e) {
-        // print('Position stream error: $e');
-      });
+      _positionStreamSubscription =
+          Geolocator.getPositionStream(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.high,
+              distanceFilter: 10, // Update every 10 meters
+            ),
+          ).listen(
+            (Position position) {
+              currentPosition.value = LatLng(
+                position.latitude,
+                position.longitude,
+              );
+              // print('Updated current position: ${currentPosition.value}');
+              _debouncedGetPolylineRoute();
+            },
+            onError: (e) {
+              // print('Position stream error: $e');
+            },
+          );
     } catch (e) {
       // print('Error starting location updates: $e');
       Get.snackbar('Error', 'Failed to start location updates');
@@ -140,7 +152,8 @@ class LocationController extends GetxController {
 
   void _debouncedGetPolylineRoute() {
     final now = DateTime.now();
-    if (_lastRouteUpdate == null || now.difference(_lastRouteUpdate!) > const Duration(seconds: 30)) {
+    if (_lastRouteUpdate == null ||
+        now.difference(_lastRouteUpdate!) > const Duration(seconds: 30)) {
       getPolylineRoute();
       _lastRouteUpdate = now;
     }
@@ -218,9 +231,12 @@ class LocationController extends GetxController {
           polylineCoordinates.value = _decodePolyline(encodedPolyline);
 
           // Extract navigation steps
-          navigationSteps.value = leg['steps'].map<Map<String, dynamic>>((step) {
+          navigationSteps.value = leg['steps'].map<Map<String, dynamic>>((
+            step,
+          ) {
             final document = parse(step['html_instructions']);
-            final cleanInstruction = document.body?.text ?? step['html_instructions'];
+            final cleanInstruction =
+                document.body?.text ?? step['html_instructions'];
             return {
               'instruction': cleanInstruction,
               'distance': step['distance']['text'] ?? '',
@@ -230,7 +246,9 @@ class LocationController extends GetxController {
 
           // Adjust map to show the entire route
           final bounds = _boundsFromLatLngList(polylineCoordinates);
-          _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+          _mapController.animateCamera(
+            CameraUpdate.newLatLngBounds(bounds, 50),
+          );
           // print('Polyline loaded with ${polylineCoordinates.length} points, ${navigationSteps.length} steps');
         } else {
           // print('Directions API error: ${data['status']}');
@@ -247,10 +265,18 @@ class LocationController extends GetxController {
   }
 
   LatLngBounds _boundsFromLatLngList(List<LatLng> list) {
-    final southwestLat = list.map((p) => p.latitude).reduce((a, b) => a < b ? a : b);
-    final southwestLng = list.map((p) => p.longitude).reduce((a, b) => a < b ? a : b);
-    final northeastLat = list.map((p) => p.latitude).reduce((a, b) => a > b ? a : b);
-    final northeastLng = list.map((p) => p.longitude).reduce((a, b) => a > b ? a : b);
+    final southwestLat = list
+        .map((p) => p.latitude)
+        .reduce((a, b) => a < b ? a : b);
+    final southwestLng = list
+        .map((p) => p.longitude)
+        .reduce((a, b) => a < b ? a : b);
+    final northeastLat = list
+        .map((p) => p.latitude)
+        .reduce((a, b) => a > b ? a : b);
+    final northeastLng = list
+        .map((p) => p.longitude)
+        .reduce((a, b) => a > b ? a : b);
 
     return LatLngBounds(
       southwest: LatLng(southwestLat, southwestLng),
@@ -259,26 +285,28 @@ class LocationController extends GetxController {
   }
 
   Set<Polyline> get routePolyline => {
-        Polyline(
-          polylineId: const PolylineId("route"),
-          color: AppColors.primary,
-          width: 4,
-          points: polylineCoordinates,
-        ),
-      };
+    Polyline(
+      polylineId: const PolylineId("route"),
+      color: AppColors.primary,
+      width: 4,
+      points: polylineCoordinates,
+    ),
+  };
 
   Set<Marker> get markers => {
-        Marker(
-          markerId: const MarkerId("currentLocation"),
-          position: currentPosition.value,
-          infoWindow: const InfoWindow(title: "You are here"),
-          icon: isVehicleIconLoaded.value ? vehicleIcon : BitmapDescriptor.defaultMarker,
-        ),
-        Marker(
-          markerId: const MarkerId("deliveryLocation"),
-          position: deliveryPosition,
-          infoWindow: const InfoWindow(title: "Delivery Location"),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-        ),
-      };
+    Marker(
+      markerId: const MarkerId("currentLocation"),
+      position: currentPosition.value,
+      infoWindow: const InfoWindow(title: "You are here"),
+      icon: isVehicleIconLoaded.value
+          ? vehicleIcon
+          : BitmapDescriptor.defaultMarker,
+    ),
+    Marker(
+      markerId: const MarkerId("deliveryLocation"),
+      position: deliveryPosition,
+      infoWindow: const InfoWindow(title: "Delivery Location"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    ),
+  };
 }
