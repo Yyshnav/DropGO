@@ -15,6 +15,6 @@ class AppTheme {
       bodyColor: Colors.black,
       displayColor: Colors.black,
     ),
-    fontFamily: GoogleFonts.poppins().fontFamily,
+    fontFamily: GoogleFonts.outfit().fontFamily,
   );
 }
