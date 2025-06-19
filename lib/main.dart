@@ -1,7 +1,9 @@
 import 'package:dropgo/app/constants/app_theme.dart';
+import 'package:dropgo/app/constants/translations.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +15,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'DineTime',
+      translations: AppTranslations(),
+      // locale: const Locale('en', 'US'),
+  
+      locale: Get.deviceLocale ,
+      fallbackLocale: const Locale('en', 'US'),
+      title: 'DropGo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: AppRoutes.reportemergency,
+      initialRoute: AppRoutes.reportemergency  
+      ,
       getPages: AppRoutes.routes,
     );
   }

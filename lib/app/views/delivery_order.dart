@@ -52,7 +52,7 @@ class DropScreen extends StatelessWidget {
               'assets/images/drawer.png',
               height: 28,
               width: 28,
-            ),
+            ),     
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
@@ -123,26 +123,26 @@ class DropScreen extends StatelessWidget {
                 buildMenuItem(
                   context,
                   icon: Icons.calendar_month,
-                  label: "Calendar",
-                  selected: drawerController.selectedItem.value == "Calendar",
+                  label: "Calendar".tr,
+                  selected: drawerController.selectedItem.value == "Calendar".tr,
                 ),
                 buildMenuItem(
                   context,
                   icon: Icons.person_outline,
-                  label: "My Account",
-                  selected: drawerController.selectedItem.value == "My Account",
+                  label: "My Account".tr,
+                  selected: drawerController.selectedItem.value == "My Account".tr,
                 ),
                 buildMenuItem(
                   context,
                   icon: Icons.location_on_outlined,
-                  label: "Address",
-                  selected: drawerController.selectedItem.value == "Address",
+                  label: "Address".tr,
+                  selected: drawerController.selectedItem.value == "Address".tr,
                 ),
                 buildMenuItem(
                   context,
                   icon: Icons.support_agent,
-                  label: "Support",
-                  selected: drawerController.selectedItem.value == "Support",
+                  label: "Support".tr,
+                  selected: drawerController.selectedItem.value == "Support".tr,
                 ),
               ],
             ),
@@ -271,8 +271,8 @@ class DropScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            child: const Text(
-                              "Pick Up Order",
+                            child:  Text(
+                              "Pick Up Order".tr,
                               style: TextStyle(
                                 color: AppColors.lightBackground,
                               ),

@@ -8,21 +8,22 @@ class ReportEmergencyScreen extends StatelessWidget {
   ReportEmergencyScreen({super.key});
   final EmergencyController controller = Get.put(EmergencyController());
 
-  final List<Map<String, dynamic>> emergencyTypes = [
-    {'icon': Icons.car_crash, 'label': 'Accident'},
-    {'icon': Icons.fire_truck, 'label': 'Fire'},
-    {'icon': Icons.medical_services, 'label': 'Medical'},
-    // {'icon': Icons.water_drop, 'label': 'Flood'},
-    {'icon': Icons.local_police, 'label': 'Police'},
-    {'icon': Icons.more_horiz, 'label': 'Other'},
-  ];
+  // final List<Map<String, dynamic>> emergencyTypes = [
+  //   {'icon': Icons.car_crash, 'label': 'Accident'},
+  //   {'icon': Icons.fire_truck, 'label': 'Fire'},
+  //   {'icon': Icons.medical_services, 'label': 'Medical'},
+  //   // {'icon': Icons.water_drop, 'label': 'Flood'},
+  //   {'icon': Icons.local_police, 'label': 'Police'},
+  //   {'icon': Icons.more_horiz, 'label': 'Other'},
+  // ];
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
-        title: const Text('Report Emergency'),
+        title:  Text('report_emergency'.tr),
         leading: const BackButton(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -34,8 +35,8 @@ class ReportEmergencyScreen extends StatelessWidget {
         child: ListView(
           children: [
             const SizedBox(height: 10),
-            const Text(
-              'Location',
+           Text(
+              'location'.tr,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Responsive.h(context, 1),
@@ -70,9 +71,9 @@ class ReportEmergencyScreen extends StatelessWidget {
 
                     trailing: InkWell(
                       onTap: controller.refreshLocation
-,
-                      child: const Text(
-                        'Refresh',
+, 
+                      child:  Text(
+                        'refresh'.tr,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w900,
@@ -87,8 +88,8 @@ class ReportEmergencyScreen extends StatelessWidget {
             Responsive.h(context, 1),
             Divider(color: Colors.black12),
             const SizedBox(height: 20),
-            const Text(
-              'Select Emergency type',
+             Text(
+              'select_emergency_type'.tr,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -98,15 +99,15 @@ class ReportEmergencyScreen extends StatelessWidget {
     children: [
       _buildEmergencyCard(
         icon: Icons.local_police,
-        label: 'Call 999',
-        selected: controller.selectedType.value == 'Call 999',
-        onTap: () => controller.selectEmergency('Call 999'),
+        label: 'call_999'.tr,
+        selected: controller.selectedType.value == 'call_999'.tr,
+        onTap: () => controller.selectEmergency('call_999'.tr),
       ),
       _buildEmergencyCard(
         icon: Icons.admin_panel_settings,
-        label: 'Contact Admin',
-        selected: controller.selectedType.value == 'Contact Admin',
-        onTap: () => controller.selectEmergency('Contact Admin'),
+        label: 'contact_admin'.tr,
+        selected: controller.selectedType.value == 'contact_admin'.tr,
+        onTap: () => controller.selectEmergency('contact_admin'.tr),
       ),
     ],
   );
