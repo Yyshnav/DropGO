@@ -1,6 +1,10 @@
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:math';
+
+import 'package:get/get_core/src/get_main.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -124,7 +128,7 @@ class IntroScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Get.toNamed('/next');
+                      Get.toNamed(AppRoutes.onboarding2);
                     },
                     child: Center(
                       child: Text("Next", style: TextStyle(fontSize: 16)),

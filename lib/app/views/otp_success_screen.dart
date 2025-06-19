@@ -1,6 +1,8 @@
 import 'package:dropgo/app/constants/custom_size.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:get/get.dart';
 
 class PasswordChangedSuccessScreen extends StatelessWidget {
   @override
@@ -9,11 +11,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
     double screenHeight = Responsive.height(context);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
+      appBar: AppBar(backgroundColor: Colors.white, elevation: 0),
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
@@ -50,7 +48,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
                 height: screenHeight * 0.065,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Navigate to login screen
+                    Get.offNamed(AppRoutes.login);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

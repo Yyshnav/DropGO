@@ -1,6 +1,7 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/controllers/language_controller.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +13,8 @@ class MyAccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const BackButton(color: Colors.white),
-        title: const Text('My Account', style: TextStyle(color: Colors.white)),
-        backgroundColor: AppColors.primary,
+        title: Text('My Account', style: TextStyle(color: Colors.white)),
+        backgroundColor: AppColors.primary, // Red color from the image
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

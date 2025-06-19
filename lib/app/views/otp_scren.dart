@@ -1,6 +1,10 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:http/http.dart';
 
 class VerifyCodeScreen extends StatelessWidget {
   final List<TextEditingController> codeControllers = List.generate(
@@ -100,7 +104,7 @@ class VerifyCodeScreen extends StatelessWidget {
               height: Responsive.height(context) * 0.065,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Submit code logic
+                  Get.offAllNamed(AppRoutes.otpsuceess);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
