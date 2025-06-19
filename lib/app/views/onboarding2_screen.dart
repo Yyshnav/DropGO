@@ -1,5 +1,8 @@
 import 'dart:math';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class IntroScreen2 extends StatelessWidget {
   const IntroScreen2({super.key});
@@ -98,7 +101,7 @@ class IntroScreen2 extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Navigation logic
+                      Get.toNamed(AppRoutes.onboarding);
                     },
                     child: Center(
                       child: Text(

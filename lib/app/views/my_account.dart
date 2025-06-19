@@ -1,7 +1,7 @@
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:get/get.dart';
 
 class MyAccountScreen extends StatelessWidget {
   @override
@@ -9,14 +9,7 @@ class MyAccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {},
-        ),
-        title: Text(
-          'My Account',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text('My Account', style: TextStyle(color: Colors.white)),
         backgroundColor: AppColors.primary, // Red color from the image
       ),
       body: Padding(
@@ -46,7 +39,6 @@ class MyAccountScreen extends StatelessWidget {
                         Text(
                           'Vaishnav',
                           style: TextStyle(
-                          
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -54,18 +46,18 @@ class MyAccountScreen extends StatelessWidget {
                         SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.phone,  size: 16),
+                            Icon(Icons.phone, size: 16),
                             SizedBox(width: 4),
                             Text(
                               '+91 9999998888',
-                              style: TextStyle( fontSize: 14),
+                              style: TextStyle(fontSize: 14),
                             ),
                           ],
                         ),
                         SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.email,  size: 16),
+                            Icon(Icons.email, size: 16),
                             SizedBox(width: 4),
                             Text(
                               'vaishnav@gmail.com',
@@ -77,10 +69,12 @@ class MyAccountScreen extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.editprofile);
+                    },
                     child: Text(
                       'Edit profile',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(color: AppColors.primary, fontSize: 14),
                     ),
                   ),
                 ],
@@ -93,7 +87,9 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     icon: Icons.receipt_long,
                     title: 'My orders',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.orderhistory);
+                    },
                   ),
                   _buildMenuItem(
                     icon: Icons.headset_mic,
@@ -104,7 +100,7 @@ class MyAccountScreen extends StatelessWidget {
                     icon: Icons.description,
                     title: 'Terms and conditions',
                     onTap: () {},
-        //  auto= true;
+                    //  auto= true;
                   ),
                   _buildMenuItem(
                     icon: Icons.visibility,
@@ -137,19 +133,9 @@ class MyAccountScreen extends StatelessWidget {
   }) {
     return Card(
       child: ListTile(
-        leading: Icon(
-          icon,
-          color: Color(0xFF7D0A0A), // Red color for icons
-        ),
-        title: Text(
-          title,
-          style: TextStyle(fontSize: 16),
-        ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.grey,
-          size: 16,
-        ),
+        leading: Icon(icon, color: AppColors.primary),
+        title: Text(title, style: TextStyle(fontSize: 16)),
+        trailing: Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
         onTap: onTap,
       ),
     );

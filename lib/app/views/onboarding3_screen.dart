@@ -1,4 +1,7 @@
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -110,7 +113,7 @@ class OnboardingScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // Navigation logic
+                        Get.toNamed(AppRoutes.login);
                       },
                       child: const Text(
                         "Get Started",

@@ -16,7 +16,6 @@ class EditProfilescreen extends StatelessWidget {
           'Edit Profile',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
         ),
-        leading: const Icon(Icons.arrow_back, color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),

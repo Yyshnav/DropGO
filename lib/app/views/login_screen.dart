@@ -1,4 +1,8 @@
+import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -79,8 +83,9 @@ class LoginScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -92,18 +97,24 @@ class LoginScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: Colors.teal[700],
-                          fontWeight: FontWeight.w500,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.forgot);
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: Colors.teal[700],
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -121,6 +132,10 @@ class LoginScreen extends StatelessWidget {
                                   text: "By signing up I agree to the ",
                                 ),
                                 TextSpan(
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.toNamed(AppRoutes.terms);
+                                    },
                                   text: "Terms of use",
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
@@ -140,16 +155,19 @@ class LoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF004F4D),
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: AppColors.activebgclr,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offNamed(AppRoutes.home);
+                        },
                         child: const Text(
                           "Login",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),

@@ -1,10 +1,25 @@
-// drawer_controller.dart
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class DrawerControllerX extends GetxController {
-  var selectedItem = 'Calendar'.obs;
+  var selectedItem = 'My Account'.obs;
+
+  final Map<String, String> routeMap = {
+    'My Account': AppRoutes.myaccount,
+    // 'Help Center': AppRoutes.,
+    'Support': AppRoutes.help,
+    'Address': AppRoutes.reportemergency, // Use the correct screen if available
+  };
 
   void setSelected(String item) {
     selectedItem.value = item;
+
+    final route = routeMap[item];
+    if (route != null && Get.currentRoute != route) {
+      Get.back(); // Close drawer
+      Future.delayed(Duration(milliseconds: 300), () {
+        Get.toNamed(route);
+      });
+    }
   }
 }

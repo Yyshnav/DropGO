@@ -1,6 +1,7 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/controllers/orderdetails_controller.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -17,10 +18,10 @@ class OrderDetailsPage extends StatelessWidget {
       backgroundColor: AppColors.lightyellowBg,
       appBar: AppBar(
         toolbarHeight: 70,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Get.back(),
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () => Get.back(),
+        // ),
         title: const Text(
           'Order Details',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
@@ -369,6 +370,7 @@ class OrderDetailsPage extends StatelessWidget {
                   innerColor: AppColors.lightyellowBg,
                   onSubmit: () {
                     orderController.deliverOrder();
+                    Get.offAndToNamed(AppRoutes.success);
                     return null;
                   },
                 );

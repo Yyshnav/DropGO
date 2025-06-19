@@ -15,7 +15,7 @@ class HelpCenterPage extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Get.back()
+          onPressed: () => Get.back(),
         ),
         title: const Text(
           'Help Center',
@@ -25,7 +25,7 @@ class HelpCenterPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.more_vert, color: Colors.black),
             onPressed: () {},
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -115,7 +115,10 @@ class ContactTile extends StatelessWidget {
               const SizedBox(width: 16),
               Text(
                 label,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/controllers/deliveryorder_controller.dart';
 import 'package:dropgo/app/controllers/drawer_controller.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -264,15 +265,24 @@ class DropScreen extends StatelessWidget {
                           width: double.infinity,
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print("++++++++++++++");
+                              print("Current route: ${Get.currentRoute}");
+                              if (Get.currentRoute != AppRoutes.editprofile) {
+                                Get.toNamed(AppRoutes.editprofile);
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
+                              backgroundColor: AppColors.primary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
+
+
+                              
                             ),
                             child: const Text(
-                              "Pick Up Order",
+                              "Pick Up Orrderh",
                               style: TextStyle(
                                 color: AppColors.lightBackground,
                               ),
@@ -389,8 +399,7 @@ class DropScreen extends StatelessWidget {
           ),
           onTap: () {
             drawerController.setSelected(label);
-            Navigator.pop(context); // close drawer
-            // Navigate or update state if needed
+            // Navigator.pop(context); // close drawer
           },
         ),
       ),
