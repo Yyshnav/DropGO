@@ -1,5 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   final TextEditingController currentPasswordController =
@@ -46,7 +47,7 @@ class ChangePasswordScreen extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    "Change Password",
+                    "Change Password".tr,
                     style: TextStyle(
                       fontSize: width * 0.05,
                       fontWeight: FontWeight.bold,
@@ -57,23 +58,23 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.03),
                 buildPasswordField(
-                  label: 'Current Password',
+                  label: 'Current Password'.tr,
                   controller: currentPasswordController,
-                  hint: 'Enter your current password',
+                  hint: 'Enter your current password'.tr,
                   width: width,
                 ),
                 SizedBox(height: height * 0.02),
                 buildPasswordField(
-                  label: 'New Password',
+                  label: 'New Password'.tr,
                   controller: newPasswordController,
-                  hint: 'New password',
+                  hint: 'New password'.tr,
                   width: width,
                 ),
                 SizedBox(height: height * 0.02),
                 buildPasswordField(
-                  label: 'Confirm Password',
+                  label: 'Confirm Password'.tr,
                   controller: confirmPasswordController,
-                  hint: 'Confirm password',
+                  hint: 'Confirm password'.tr,
                   width: width,
                 ),
                 SizedBox(height: height * 0.04),
@@ -92,7 +93,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'SAVE',
+                      'SAVE'.tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: width * 0.04,

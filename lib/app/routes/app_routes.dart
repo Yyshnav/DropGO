@@ -9,6 +9,7 @@ import 'package:dropgo/app/views/delivery_order.dart';
 import 'package:dropgo/app/views/delivery_success.dart';
 import 'package:dropgo/app/views/help_center.dart';
 import 'package:dropgo/app/views/my_account.dart';
+import 'package:dropgo/app/views/my_account.dart';
 import 'package:dropgo/app/views/onboarding1_screen.dart';
 import 'package:dropgo/app/views/onboarding2_screen.dart';
 import 'package:dropgo/app/views/onboarding3_screen.dart';
@@ -40,6 +41,7 @@ class AppRoutes {
   static const orderdetails = '/orderdetails';
   static const editprofile = '/editprofile';
   static const orderhistory = '/orderhistory';
+  static const account = '/account';
 
   static final routes = [
     GetPage(name: onboarding1, page: () => IntroScreen()),
@@ -59,5 +61,6 @@ class AppRoutes {
     GetPage(name: help, page: () => HelpCenterPage()),
     GetPage(name: chat, page: () => ChatScreen()),
     GetPage(name: reportemergency, page: () => ReportEmergencyScreen()),
+    GetPage(name: account, page: () => MyAccountScreen()),
   ];
 }
