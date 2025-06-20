@@ -43,7 +43,9 @@ class DropScreen extends StatelessWidget {
         toolbarHeight: 65,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.reportemergency);
+            },
             icon: Image.asset('assets/images/sos.png', height: 24, width: 24),
           ),
         ],
@@ -266,10 +268,8 @@ class DropScreen extends StatelessWidget {
                           height: 48,
                           child: ElevatedButton(
                             onPressed: () {
-                              print("++++++++++++++");
-                              print("Current route: ${Get.currentRoute}");
                               if (Get.currentRoute != AppRoutes.editprofile) {
-                                Get.toNamed(AppRoutes.editprofile);
+                                Get.toNamed(AppRoutes.orderscreen);
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -282,7 +282,7 @@ class DropScreen extends StatelessWidget {
                               
                             ),
                             child: const Text(
-                              "Pick Up Orrderh",
+                              "Pick Up Order",
                               style: TextStyle(
                                 color: AppColors.lightBackground,
                               ),

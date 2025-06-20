@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'DropGo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: AppRoutes.reportemergency  
-      ,
+      initialRoute: AppRoutes.onboarding1,
       getPages: AppRoutes.routes,
     );
   }

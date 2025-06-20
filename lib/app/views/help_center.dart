@@ -1,5 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +59,7 @@ class HelpCenterPage extends StatelessWidget {
               icon: 'assets/images/chatt.png',
               label: 'Chat',
               onTap: () {
-                // Implement chat action
+                Get.toNamed(AppRoutes.chat);
               },
             ),
             const SizedBox(height: 12),
