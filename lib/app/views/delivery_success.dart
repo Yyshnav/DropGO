@@ -1,6 +1,8 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
+import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -44,7 +46,9 @@ class SuccessScreen extends StatelessWidget {
               
               ),
               
-              onPressed: (){}, child: Text('Get Orders',style: GoogleFonts.outfit(fontSize: 17, fontWeight: FontWeight.bold),))
+              onPressed: (){
+                Get.toNamed(AppRoutes.home);
+              }, child: Text('Get Orders',style: GoogleFonts.outfit(fontSize: 17, fontWeight: FontWeight.bold),))
           ],
         ),
       ),

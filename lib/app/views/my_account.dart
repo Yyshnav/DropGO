@@ -2,6 +2,7 @@ import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/controllers/language_controller.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
+import 'package:dropgo/app/views/change_password.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,9 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     image: "assets/images/profile.png",
                     title: 'Edit profile',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.editprofile);
+                    },
                   ),
                   _buildMenuItem(
                     image: "assets/images/lang.png",
@@ -46,25 +49,29 @@ class MyAccountScreen extends StatelessWidget {
                           child: _buildLanguageCards()),
                       )
                       : const SizedBox()),
-                  _buildMenuItem(
-                    image: "assets/images/support.png",
-                    title: 'Support',
-                    onTap: () {},
-                  ),
+                  // _buildMenuItem(
+                  //   image: "assets/images/support.png",
+                  //   title: 'Support',
+                  //   onTap: () {},
+                  // ),
                   _buildMenuItem(
                     image: "assets/images/terms.png",
                     title: 'Terms and conditions',
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.terms);
+                    },
                   ),
-                  _buildMenuItem(
-                    image: "assets/images/privacy.png",
-                    title: 'Privacy policy',
-                    onTap: () {},
-                  ),
+                  // _buildMenuItem(
+                  //   image: "assets/images/privacy.png",
+                  //   title: 'Privacy policy',
+                  //   onTap: () {},
+                  // ),
                   _buildMenuItem(
                     image: "assets/images/changepwd.png",
                     title: 'Change password',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
+                    },
                   ),
                   _buildMenuItem(
                     image: "assets/images/logout.png",
