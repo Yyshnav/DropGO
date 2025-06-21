@@ -1,5 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DottedContainerScreen extends StatelessWidget {
   const DottedContainerScreen({super.key});
@@ -11,8 +12,8 @@ class DottedContainerScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
-        title: const Text(
-          "Agreement",
+        title: Text(
+          "Agreement".tr,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -21,8 +22,8 @@ class DottedContainerScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Terms and Conditions *",
+            Text(
+              "Terms and Conditions *".tr,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -35,11 +36,11 @@ class DottedContainerScreen extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "1. Engagement and Duties",
+                      "1. Engagement and Duties".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -48,13 +49,13 @@ class DottedContainerScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 6),
                     BulletPoint(
-                      text: "Deliver goods in a safe and professional manner.",
+                      text: "Deliver goods in a safe and professional manner.".tr,
                     ),
-                    BulletPoint(text: "Verify orders before delivery."),
-                    BulletPoint(text: "Ensure safety during transit."),
+                    BulletPoint(text: "Verify orders before delivery.".tr),
+                    BulletPoint(text: "Ensure safety during transit.".tr),
                     SizedBox(height: 14),
                     Text(
-                      "2. Code of Conduct",
+                      "2. Code of Conduct".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -62,12 +63,12 @@ class DottedContainerScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 6),
-                    BulletPoint(text: "Maintain professional behavior."),
-                    BulletPoint(text: "Avoid disrespectful language."),
-                    BulletPoint(text: "Do not tamper with delivery."),
+                    BulletPoint(text: "Maintain professional behavior.".tr),
+                    BulletPoint(text: "Avoid disrespectful language.".tr),
+                    BulletPoint(text: "Do not tamper with delivery.".tr),
                     SizedBox(height: 14),
                     Text(
-                      "3. Personal Responsibility",
+                      "3. Personal Responsibility".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -75,12 +76,12 @@ class DottedContainerScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 6),
-                    BulletPoint(text: "Carry a valid driver’s license."),
-                    BulletPoint(text: "Follow all traffic rules."),
-                    BulletPoint(text: "No drug/alcohol use during work."),
+                    BulletPoint(text: "Carry a valid driver’s license.".tr),
+                    BulletPoint(text: "Follow all traffic rules.".tr),
+                    BulletPoint(text: "No drug/alcohol use during work.".tr),
                     SizedBox(height: 14),
                     Text(
-                      "4. Vehicle Maintenance",
+                      "4. Vehicle Maintenance".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -88,12 +89,12 @@ class DottedContainerScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 6),
-                    BulletPoint(text: "Ensure vehicle is serviced regularly."),
+                    BulletPoint(text: "Ensure vehicle is serviced regularly.".tr),
                     BulletPoint(
-                      text: "Keep the vehicle clean and well-maintained.",
+                      text: "Keep the vehicle clean and well-maintained.".tr,
                     ),
                     BulletPoint(
-                      text: "Report any technical issues immediately.",
+                      text: "Report any technical issues immediately.".tr,
                     ),
                   ],
                 ),

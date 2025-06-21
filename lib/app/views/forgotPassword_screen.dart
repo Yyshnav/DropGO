@@ -2,7 +2,6 @@ import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -22,7 +21,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Forgot password",
+              "Forgot password".tr,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -31,12 +30,12 @@ class ForgotPasswordScreen extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              "Please enter your email to reset the password",
+              "Please enter your email to reset the password".tr,
               style: TextStyle(color: Colors.grey[600]),
             ),
             SizedBox(height: 30),
             Text(
-              "Your Email",
+              "Your Email".tr,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
@@ -46,7 +45,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             TextField(
               controller: emailController,
               decoration: InputDecoration(
-                hintText: "Enter your email",
+                hintText: "Enter your email".tr,
                 hintStyle: TextStyle(color: AppColors.txtfldclr),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -70,7 +69,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text("Reset Password"),
+                child: Text("Reset Password".tr),
               ),
             ),
           ],

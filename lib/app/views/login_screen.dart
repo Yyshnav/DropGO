@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                     TextField(
                       style: const TextStyle(color: Colors.black),
                       decoration: InputDecoration(
-                        hintText: 'Enter your username',
+                        hintText: 'Enter your username'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                       style: const TextStyle(color: Colors.black),
                       obscureText: true,
                       decoration: InputDecoration(
-                        hintText: 'Enter your password',
+                        hintText: 'Enter your password'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -110,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.forgot);
                         },
                         child: Text(
-                          "Forgot Password?",
+                          "Forgot Password?".tr,
                           style: TextStyle(
                             color: Colors.teal[700],
                             fontWeight: FontWeight.w500,
@@ -128,20 +128,20 @@ class LoginScreen extends StatelessWidget {
                             text: TextSpan(
                               style: const TextStyle(color: Colors.black),
                               children: [
-                                const TextSpan(
-                                  text: "By signing up I agree to the ",
+                                TextSpan(
+                                  text: "By signing up I agree to the ".tr,
                                 ),
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       Get.toNamed(AppRoutes.terms);
                                     },
-                                  text: "Terms of use",
+                                  text: "Terms of use".tr,
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
-                                const TextSpan(text: " and "),
+                                TextSpan(text: " and ".tr),
                                 TextSpan(
-                                  text: "Privacy Policy.",
+                                  text: "Privacy Policy.".tr,
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
                               ],
@@ -165,8 +165,8 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {
                           Get.offNamed(AppRoutes.home);
                         },
-                        child: const Text(
-                          "Login",
+                        child: Text(
+                          "Login".tr,
                           style: TextStyle(fontSize: 16),
                         ),
                       ),

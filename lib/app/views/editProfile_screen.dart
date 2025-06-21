@@ -143,6 +143,7 @@
 // }
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class EditProfilescreen extends StatefulWidget {
   const EditProfilescreen({super.key});
@@ -165,11 +166,12 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
-          'Edit Profile',
+          'Edit Profile'.tr,
           style: TextStyle(
             color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.w900,
           ),
+       
         ),
         iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
       ),
@@ -246,23 +248,24 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                     SizedBox(height: size.height * 0.015),
                     buildEditableTile(
                       context,
-                      "NAME",
+                      "NAME".tr,
                       nameController,
                       size.width,
                     ),
                     buildEditableTile(
                       context,
-                      "EMAIL",
+                      "EMAIL".tr,
                       emailController,
                       size.width,
                     ),
                     buildEditableTile(
                       context,
-                      "MOBILENUMBER",
+                      "MOBILENUMBER".tr,
                       mobileController,
                       size.width,
                     ),
                     const Spacer(),
+                    
                     Center(
                       child: SizedBox(
                         width: double.infinity,
@@ -283,7 +286,7 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
                             ),
                           ),
                           child: Text(
-                            'Save Change',
+                            'Save Change'.tr,
                             style: TextStyle(
                               fontSize: size.width * 0.04,
                               fontWeight: FontWeight.bold,

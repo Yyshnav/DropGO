@@ -232,7 +232,7 @@ class MyAccountScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
-          'My Account',
+          'My Account'.tr,
           style: TextStyle(
             color:
                 Theme.of(context).appBarTheme.foregroundColor ?? Colors.white,
@@ -259,6 +259,14 @@ class MyAccountScreen extends StatelessWidget {
                   // ),
                   _buildMenuItem(
                     context,
+                    image: "assets/images/profile.png",
+                    title: 'Edit profile'.tr,
+                    onTap: () {
+                      Get.toNamed(AppRoutes.editprofile);
+                    },
+                  ),
+                  _buildMenuItem(
+                    context,
                     image: "assets/images/lang.png",
                     title: 'language'.tr,
                     onTap: langController.toggleLanguageOptions,
@@ -280,7 +288,7 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     context,
                     image: "assets/images/terms.png",
-                    title: 'Terms and conditions',
+                    title: 'Terms and conditions'.tr,
                     onTap: () {
                       Get.toNamed(AppRoutes.terms);
                     },
@@ -288,7 +296,7 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     context,
                     image: "assets/images/changepwd.png",
-                    title: 'Change password',
+                    title: 'Change password'.tr,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -301,7 +309,7 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     context,
                     image: "assets/images/logout.png",
-                    title: 'Log out',
+                    title: 'Log out'.tr,
                     onTap: () {},
                   ),
                   ListTile(
@@ -387,10 +395,11 @@ class MyAccountScreen extends StatelessWidget {
               Get.toNamed(AppRoutes.editprofile);
             },
             child: Text(
-              'Edit profile',
-              style: TextStyle(                      color: Theme.of(context).iconTheme.color,
+              'Edit profile'.tr,
+              style: TextStyle(color: Theme.of(context).iconTheme.color,
 ),
             ),
+            
           ),
         ],
       ),

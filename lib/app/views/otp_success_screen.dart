@@ -26,7 +26,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
               ),
               Responsive.h(context, 2),
               Text(
-                "Successful",
+                "Successful".tr,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: screenWidth * 0.05,
@@ -35,7 +35,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
               ),
               Responsive.h(context, 1.5),
               Text(
-                "Congratulations! Your password has been changed. Click continue to login",
+                "Congratulations! Your password has been changed. Click continue to login".tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: screenWidth * 0.035,
@@ -58,7 +58,7 @@ class PasswordChangedSuccessScreen extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Login",
+                    "Login".tr,
                     style: TextStyle(fontSize: screenWidth * 0.045),
                   ),
                 ),

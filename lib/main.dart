@@ -34,6 +34,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:dropgo/app/constants/app_theme.dart';
 import 'package:dropgo/app/constants/translations.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:dropgo/app/controllers/theme_controller.dart'; 
 
 void main() async {
