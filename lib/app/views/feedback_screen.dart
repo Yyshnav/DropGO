@@ -253,14 +253,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Share your experience",
+                        "Share your experience".tr,
                         style: TextStyle(
                           color: isDark ? AppColors.darkText : Colors.white,
                           fontSize: 16,
                         ),
-                      Text(
-                        "Share your experience".tr,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      
                       ),
                       const SizedBox(height: 20),
                       RatingBar.builder(
@@ -296,10 +294,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           style: TextStyle(
                             color: isDark ? AppColors.darkText : Colors.black,
                           ),
-                          decoration: InputDecoration(
+                         
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Add your comments...',
+                            
                             hintStyle: TextStyle(
                               color: isDark
                                   ? AppColors.darkInactive

@@ -153,14 +153,12 @@ class HelpCenterPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          'Help Center',
+          'Help Center'.tr,
           style: TextStyle(
             color: theme.textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
           ),
-        title: Text(
-          'Help Center'.tr,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        
         ),
         actions: [
           IconButton(

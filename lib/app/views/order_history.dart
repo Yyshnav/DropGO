@@ -418,10 +418,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Order Received",
-                          style: TextStyle(color: theme.hintColor),
                           "Order Received".tr,
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: theme.hintColor),
+                          
                         ),
                         Text(
                           "01:10 PM",
@@ -446,10 +445,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Delivery Time",
-                          style: TextStyle(color: theme.hintColor),
                           "Delivery Time".tr,
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: theme.hintColor),
+                          
                         ),
                         Text(
                           "01:45 PM",
@@ -488,7 +486,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: const Text("Completed"),
+                 
                   child: Text("Completed".tr),
                 ),
               ],

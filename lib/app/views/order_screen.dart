@@ -309,21 +309,18 @@ class OrderScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
-          'Order',
+          'Order'.tr,
           style: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
         ),
         actions: [
           Icon(Icons.search, color: Theme.of(context).iconTheme.color),
-        title: Text('Order'.tr, style: TextStyle(color: Colors.black)),
-        // leading: const Icon(Icons.arrow_back, color: Colors.black),
-        actions: const [
-          Icon(Icons.search, color: Colors.black),
           SizedBox(width: 12),
           Icon(
             Icons.filter_alt_outlined,
             color: Theme.of(context).iconTheme.color,
           ),
           SizedBox(width: 12),
+                  
         ],
       ),
       body: Obx(
@@ -368,34 +365,33 @@ class OrderCard extends StatelessWidget {
                   InProgressBadge(),
                 ],
               // In Progress badge
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  "In Progress".tr,
-                  style: TextStyle(
-                    color: AppColors.lightBackground,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                  ),
-                ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              //   decoration: BoxDecoration(
+              //     color: AppColors.primary,
+              //     borderRadius: BorderRadius.circular(6),
+              //   ),
+              //   child: Text(
+              //     "In Progress".tr,
+              //     style: TextStyle(
+              //       color: AppColors.lightBackground,
+              //       fontWeight: FontWeight.w600,
+              //       fontSize: 12,
+              //     ),
+              //   ),
               ),
               const SizedBox(height: 12),
 
               Row(
                 children: [
-                children: [
-                  Text(
-                    "OrderNo. F15306",
+                Text(
+                    // "OrderNo. F15306",
                     style: TextStyle(
                       fontSize: 12,
                       color: Theme.of(context).hintColor,
                     ),
                     '${"OrderNo.".tr} ${"F15306"}',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    // style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   const Spacer(),
                   Text(
@@ -485,20 +481,18 @@ class OrderCard extends StatelessWidget {
                     ),
                   ),
 
-                  Column(
-      
+                      
                   // Distance & Time
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "Distance",
+                        "Distance".tr,
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context).hintColor,
                         ),
-                        "Distance".tr,
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                        
                       ),
                       Text(
                         "14 km",
@@ -509,13 +503,12 @@ class OrderCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 18),
                       Text(
-                        "Time",
+                        "Time".tr,
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context).hintColor,
                         ),
-                        "Time".tr,
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                         
                       ),
                       Text(
                         "30 min",
@@ -547,8 +540,8 @@ class InProgressBadge extends StatelessWidget {
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(6),
       ),
-      child: const Text(
-        "In Progress",
+      child: Text(
+        "In Progress".tr,
         style: TextStyle(
           color: AppColors.lightBackground,
           fontWeight: FontWeight.w600,

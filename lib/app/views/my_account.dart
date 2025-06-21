@@ -266,6 +266,7 @@ class MyAccountScreen extends StatelessWidget {
                     },
                   ),
                   _buildMenuItem(
+                    context,
                     image: "assets/images/lang.png",
                     title: 'language'.tr,
                     onTap: langController.toggleLanguageOptions,
@@ -394,13 +395,11 @@ class MyAccountScreen extends StatelessWidget {
               Get.toNamed(AppRoutes.editprofile);
             },
             child: Text(
-              'Edit profile',
-              style: TextStyle(                      color: Theme.of(context).iconTheme.color,
+              'Edit profile'.tr,
+              style: TextStyle(color: Theme.of(context).iconTheme.color,
 ),
             ),
-            onPressed: () {},
-            child: Text('Edit profile'.tr,
-                style: TextStyle(color: Colors.white)),
+            
           ),
         ],
       ),

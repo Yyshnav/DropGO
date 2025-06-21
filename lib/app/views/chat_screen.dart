@@ -314,11 +314,9 @@ class ChatScreen extends StatelessWidget {
           ),
           onPressed: () => Get.back(),
         ),
+        
         title: Text(
           'Customer Service'.tr,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        title: Text(
-          'Customer Service',
           style: TextStyle(
             color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold,

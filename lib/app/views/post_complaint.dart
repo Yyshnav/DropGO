@@ -276,16 +276,10 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Description",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: isDark ? AppColors.darkText : AppColors.black,
-              ),
+           
             Text(
               "Description".tr,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: isDark ? AppColors.darkText : AppColors.black,),
             ),
             const SizedBox(height: 8),
 
@@ -306,10 +300,10 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                     color: isDark ? AppColors.darkText : AppColors.black,
                   ),
                   onChanged: (_) => setState(() {}),
-                  decoration: InputDecoration(
+                  
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Enter your complaint...',
+                   
                     hintStyle: TextStyle(
                       color: isDark
                           ? AppColors.darkInactive
@@ -317,7 +311,7 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                     ),
                     counterText: '',
                     hintText: 'Enter your complaint...'.tr,
-                    counterText: '', // Hide default counter
+                    
                   ),
                 ),
               ),
@@ -351,7 +345,7 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                          children: [
+                          
                             Icon(
                               Icons.image,
                               size: 32,
@@ -359,14 +353,13 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              "Upload Proof (optional)",
+                              "Upload Proof (optional)".tr,
                               style: TextStyle(
                                 color: isDark
                                     ? AppColors.darkInactive
                                     : Colors.grey,
                               ),
-                              "Upload Proof (optional)".tr,
-                              style: TextStyle(color: Colors.grey),
+                              
                             ),
                           ],
                         )
