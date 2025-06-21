@@ -2,13 +2,13 @@ import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class DrawerControllerX extends GetxController {
-  var selectedItem = 'My Account'.obs;
+  var selectedItem = 'My orders'.obs;
 
   final Map<String, String> routeMap = {
     'My Account': AppRoutes.myaccount,
-    // 'Help Center': AppRoutes.,
+    'My orders': AppRoutes.orderhistory,
     'Support': AppRoutes.help,
-    'Address': AppRoutes.reportemergency, // Use the correct screen if available
+    'App feedback': AppRoutes.appfeedback, // Use the correct screen if available
   };
 
   void setSelected(String item) {
