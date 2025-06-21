@@ -18,6 +18,7 @@ import 'package:dropgo/app/views/order_history.dart';
 import 'package:dropgo/app/views/order_screen.dart';
 import 'package:dropgo/app/views/otp_scren.dart';
 import 'package:dropgo/app/views/otp_success_screen.dart';
+import 'package:dropgo/app/views/post_complaint.dart';
 import 'package:dropgo/app/views/splash_screen.dart';
 import 'package:dropgo/app/views/report_emergency.dart';
 import 'package:dropgo/app/views/terms_cndtn_screen.dart';
@@ -45,6 +46,8 @@ class AppRoutes {
   static const account = '/account';
   static const orderscreen = '/orderscreen';
   static const changepwd = '/changepwd';
+  static const complaint = '/complaint';
+  static const appfeedback = '/appfeedback';
 
   static final routes = [
     GetPage(name: onboarding1, page: () => IntroScreen()),
@@ -67,5 +70,7 @@ class AppRoutes {
     GetPage(name: account, page: () => MyAccountScreen()),
     GetPage(name: orderscreen, page: () => OrderScreen()),
     GetPage(name: changepwd, page: () => ChangePasswordScreen()),
+    GetPage(name: complaint, page: () => PostComplaintScreen()),
+    GetPage(name: appfeedback, page: () => FeedbackScreen()),
   ];
 }

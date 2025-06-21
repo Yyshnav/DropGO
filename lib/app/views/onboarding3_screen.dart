@@ -78,7 +78,7 @@ class OnboardingScreen extends StatelessWidget {
 
                 // Page Indicator - center aligned
                 Positioned(
-                  top: screenSize.height * 0.78,
+                  top: screenSize.height * 0.81,
                   left: 0,
                   right: 0,
                   child: Row(
@@ -99,7 +99,7 @@ class OnboardingScreen extends StatelessWidget {
 
                 // Get Started Button - below indicator
                 Positioned(
-                  top: screenSize.height * 0.88,
+                  top: screenSize.height * 0.85,
                   left: 20,
                   right: 20,
                   child: SizedBox(
