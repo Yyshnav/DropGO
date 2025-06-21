@@ -1,5 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   @override
@@ -145,7 +146,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Order Received",
+                          "Order Received".tr,
                           style: TextStyle(color: Colors.grey),
                         ),
                         Text(
@@ -169,7 +170,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Delivery Time",
+                          "Delivery Time".tr,
                           style: TextStyle(color: Colors.grey),
                         ),
                         Text(
@@ -188,7 +189,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                OutlinedButton(onPressed: () {}, child: Text("Complaint")),
+                OutlinedButton(onPressed: () {}, child: Text("Complaint".tr)),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -197,7 +198,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: Text("Completed"),
+                  child: Text("Completed".tr),
                 ),
               ],
             ),

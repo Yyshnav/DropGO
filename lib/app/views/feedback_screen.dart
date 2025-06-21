@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class FeedbackScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
-        title: const Text('Feedback'),
+        title: Text('Feedback'.tr),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -50,8 +51,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        "Share your experience",
+                      Text(
+                        "Share your experience".tr,
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       const SizedBox(height: 20),
@@ -83,9 +84,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         child: TextField(
                           controller: _commentController,
                           maxLines: 4,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Add your comments...',
+                            hintText: 'Add your comments...'.tr,
                           ),
                         ),
                       ),
@@ -94,8 +95,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            debugPrint("Rating: $_rating");
-                            debugPrint("Comment: ${_commentController.text}");
+                            debugPrint("Rating: $_rating".tr);
+                            debugPrint("Comment: ${_commentController.text}".tr);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -105,7 +106,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text("Accept"),
+                          child: Text("Accept".tr),
                         ),
                       ),
                     ],

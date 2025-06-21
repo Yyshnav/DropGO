@@ -14,7 +14,7 @@ class MyAccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('My Account', style: TextStyle(color: Colors.white)),
+        title: Text('My Account'.tr, style: TextStyle(color: Colors.white)),
         backgroundColor: AppColors.primary, // Red color from the image
       ),
       body: Padding(
@@ -28,7 +28,7 @@ class MyAccountScreen extends StatelessWidget {
                 children: [
                   _buildMenuItem(
                     image: "assets/images/profile.png",
-                    title: 'Edit profile',
+                    title: 'Edit profile'.tr,
                     onTap: () {
                       Get.toNamed(AppRoutes.editprofile);
                     },
@@ -56,7 +56,7 @@ class MyAccountScreen extends StatelessWidget {
                   // ),
                   _buildMenuItem(
                     image: "assets/images/terms.png",
-                    title: 'Terms and conditions',
+                    title: 'Terms and conditions'.tr,
                     onTap: () {
                       Get.toNamed(AppRoutes.terms);
                     },
@@ -68,14 +68,14 @@ class MyAccountScreen extends StatelessWidget {
                   // ),
                   _buildMenuItem(
                     image: "assets/images/changepwd.png",
-                    title: 'Change password',
+                    title: 'Change password'.tr,
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
                     },
                   ),
                   _buildMenuItem(
                     image: "assets/images/logout.png",
-                    title: 'Log out',
+                    title: 'Log out'.tr,
                     onTap: () {},
                   ),
                 ],
@@ -126,7 +126,7 @@ class MyAccountScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {},
-            child: const Text('Edit profile',
+            child: Text('Edit profile'.tr,
                 style: TextStyle(color: Colors.white)),
           ),
         ],

@@ -23,8 +23,8 @@ class ChatScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Get.back(),
         ),
-        title: const Text(
-          'Customer Service',
+        title: Text(
+          'Customer Service'.tr,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -45,9 +45,9 @@ class ChatScreen extends StatelessWidget {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem<String>(
+              PopupMenuItem<String>(
                 value: 'clear',
-                child: Text('Clear Chat'),
+                child: Text('Clear Chat'.tr),
               ),
             ],
           ),
@@ -108,8 +108,8 @@ class ChatScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16.0, bottom: 4),
                     child: Row(
                       children: [
-                        const Text(
-                          'Typing',
+                        Text(
+                          'Typing'.tr,
                           style: TextStyle(color: Colors.grey),
                         ),
                         const SizedBox(width: 4),
@@ -161,7 +161,7 @@ class ChatScreen extends StatelessWidget {
                               color: Colors.black12,
                             ),
                           ),
-                          hintText: 'Message...',
+                          hintText: 'Message...'.tr,
                           border: InputBorder.none,
                         ),
                         onChanged: (val) {

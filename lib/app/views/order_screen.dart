@@ -17,7 +17,7 @@ class OrderScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.cardbgclr,
         elevation: 0,
-        title: const Text('Order', style: TextStyle(color: Colors.black)),
+        title: Text('Order'.tr, style: TextStyle(color: Colors.black)),
         // leading: const Icon(Icons.arrow_back, color: Colors.black),
         actions: const [
           Icon(Icons.search, color: Colors.black),
@@ -66,8 +66,8 @@ class OrderCard extends StatelessWidget {
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: const Text(
-                  "In Progress",
+                child: Text(
+                  "In Progress".tr,
                   style: TextStyle(
                     color: AppColors.lightBackground,
                     fontWeight: FontWeight.w600,
@@ -79,9 +79,9 @@ class OrderCard extends StatelessWidget {
       
               // Header
               Row(
-                children: const [
+                children: [
                   Text(
-                    "OrderNo. F15306",
+                    '${"OrderNo.".tr} ${"F15306"}',
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   Spacer(),
@@ -167,11 +167,11 @@ class OrderCard extends StatelessWidget {
                   ),
       
                   // Distance & Time
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "Distance",
+                        "Distance".tr,
                         style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                       Text(
@@ -183,7 +183,7 @@ class OrderCard extends StatelessWidget {
                       ),
                       SizedBox(height: 18),
                       Text(
-                        "Time",
+                        "Time".tr,
                         style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                       Text(

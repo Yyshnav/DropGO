@@ -23,8 +23,8 @@ class OrderDetailsPage extends StatelessWidget {
         //   icon: const Icon(Icons.arrow_back, color: Colors.black),
         //   onPressed: () => Get.back(),
         // ),
-        title: const Text(
-          'Order Details',
+        title: Text(
+          'Order Details'.tr,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
@@ -66,7 +66,7 @@ class OrderDetailsPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "124 Deliveries",
+                        "124 Deliveries".tr,
                         style: TextStyle(fontSize: 12, color: Colors.black54),
                       ),
                       const SizedBox(height: 6),
@@ -126,7 +126,7 @@ class OrderDetailsPage extends StatelessWidget {
                           vertical: 6,
                         ),
                         child: Text(
-                          'Pending',
+                          'Pending'.tr,
                           style: TextStyle(
                             color: AppColors.lightyellowBg,
                             fontSize: 10,
@@ -171,7 +171,7 @@ class OrderDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Pickup Location",
+                      "Pickup Location".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
                         color: Colors.black54,
@@ -190,7 +190,7 @@ class OrderDetailsPage extends StatelessWidget {
                     Responsive.h(context, 2),
 
                     Text(
-                      "Delivery Location",
+                      "Delivery Location".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.w200,
                         color: Colors.black54,
@@ -212,11 +212,11 @@ class OrderDetailsPage extends StatelessWidget {
 
             Responsive.h(context, 5),
 
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Items to be picked",
+                  "Items to be picked".tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 12,
@@ -224,7 +224,7 @@ class OrderDetailsPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Customer contact number",
+                  "Customer contact number".tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 12,
@@ -288,11 +288,11 @@ class OrderDetailsPage extends StatelessWidget {
 
             Responsive.h(context, 5),
 
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Payment Method",
+                  "Payment Method".tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,
@@ -300,7 +300,7 @@ class OrderDetailsPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Amount",
+                  "Amount".tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,
@@ -310,11 +310,11 @@ class OrderDetailsPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "COD",
+                  "COD".tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     color: Colors.black54,
@@ -334,8 +334,8 @@ class OrderDetailsPage extends StatelessWidget {
                 return Container(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   width: double.infinity,
-                  child: const Text(
-                    "Order Delivered ✅",
+                  child: Text(
+                    "Order Delivered ✅".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.teal,
@@ -346,7 +346,7 @@ class OrderDetailsPage extends StatelessWidget {
                 );
               } else if (!orderController.isPickedUp.value) {
                 return SlideAction(
-                  text: "Slide to Confirm Pickup",
+                  text: "Slide to Confirm Pickup".tr,
                   textStyle: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -361,7 +361,7 @@ class OrderDetailsPage extends StatelessWidget {
                 );
               } else {
                 return SlideAction(
-                  text: "Slide to Deliver Order",
+                  text: "Slide to Deliver Order".tr,
                   textStyle: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

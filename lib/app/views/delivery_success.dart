@@ -19,7 +19,7 @@ class SuccessScreen extends StatelessWidget {
             Image.asset('assets/images/success.png', height: 135, width: 135),
             const SizedBox(height: 20), 
             SizedBox(width: 300,
-              child: Text('Your last order was delivered smoothly!',textAlign: TextAlign.center,
+              child: Text('Your last order was delivered smoothly!'.tr,textAlign: TextAlign.center,
                   style: TextStyle(
                         letterSpacing: 0.5,
                         color: Colors.black87,
@@ -29,7 +29,7 @@ class SuccessScreen extends StatelessWidget {
             ),
             Responsive.h(context, 2),
             SizedBox(width: 310,
-              child: const Text('Ready for your next delivery? Head back to the app and keep the orders coming!',
+              child: Text('Ready for your next delivery? Head back to the app and keep the orders coming!'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black45,
@@ -48,7 +48,7 @@ class SuccessScreen extends StatelessWidget {
               
               onPressed: (){
                 Get.toNamed(AppRoutes.home);
-              }, child: Text('Get Orders',style: GoogleFonts.outfit(fontSize: 17, fontWeight: FontWeight.bold),))
+              }, child: Text('Get Orders'.tr,style: GoogleFonts.outfit(fontSize: 17, fontWeight: FontWeight.bold),))
           ],
         ),
       ),

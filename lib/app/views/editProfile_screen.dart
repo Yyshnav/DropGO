@@ -1,5 +1,6 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class EditProfilescreen extends StatelessWidget {
   const EditProfilescreen({super.key});
@@ -12,8 +13,8 @@ class EditProfilescreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.lightBackground,
         elevation: 0,
-        title: const Text(
-          'Edit Profile',
+        title: Text(
+          'Edit Profile'.tr,
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
         ),
       ),
@@ -86,9 +87,9 @@ class EditProfilescreen extends StatelessWidget {
                     SizedBox(height: size.height * 0.02),
                     Divider(height: 1, color: AppColors.primary),
                     SizedBox(height: size.height * 0.015),
-                    buildProfileTile("NAME", "VAISHNAV A", size),
-                    buildProfileTile("EMAIL", "vaishnav@gmail.com", size),
-                    buildProfileTile("MOBILENUMBER", "9999988888", size),
+                    buildProfileTile("NAME".tr, "VAISHNAV A", size),
+                    buildProfileTile("EMAIL".tr, "vaishnav@gmail.com", size),
+                    buildProfileTile("MOBILENUMBER".tr, "9999988888", size),
                     Spacer(),
                     Center(
                       child: SizedBox(
@@ -106,7 +107,7 @@ class EditProfilescreen extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            'Save Change',
+                            'Save Change'.tr,
                             style: TextStyle(
                               fontSize: size.width * 0.04,
                               fontWeight: FontWeight.bold,
