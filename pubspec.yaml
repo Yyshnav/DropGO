@@ -55,6 +55,8 @@ dependencies:
   geocoding: ^4.0.0
   audioplayers: ^6.5.0
   get_storage: ^2.1.1
+  dio: ^5.8.0+1
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
