@@ -390,17 +390,17 @@ class MyAccountScreen extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-            onPressed: () {
-              Get.toNamed(AppRoutes.editprofile);
-            },
-            child: Text(
-              'Edit profile'.tr,
-              style: TextStyle(color: Theme.of(context).iconTheme.color,
-),
-            ),
+//           TextButton(
+//             onPressed: () {
+//               Get.toNamed(AppRoutes.editprofile);
+//             },
+//             child: Text(
+//               'Edit profile'.tr,
+//               style: TextStyle(color: Theme.of(context).iconTheme.color,
+// ),
+//             ),
             
-          ),
+//           ),
         ],
       ),
     );

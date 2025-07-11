@@ -21,6 +21,8 @@ class AppTranslations extends Translations {
       'SAVE': 'SAVE',
       // order delivery
       'Calendar': 'Calendar',
+      "My orders": "My orders",
+      "App feedback": "App feedback",
       'My Account': 'My Account',
       'Address': 'Address',
       "Support": "Support",
@@ -177,6 +179,8 @@ class AppTranslations extends Translations {
       'SAVE': 'സേവ് ചെയ്യുക',
       // order delivery
       'Calendar': 'കലണ്ടർ',
+      'My orders': 'എന്റെ ഓർഡറുകൾ',
+      'App feedback': 'ആപ്പ് ഫീഡ്‌ബാക്ക്',
       'My Account': 'എൻ്റെ അക്കൗണ്ട്',
       'Address': 'വിലാസം',
       'Support': 'സഹായം',
@@ -333,6 +337,8 @@ class AppTranslations extends Translations {
       'SAVE': 'حفظ',
       // order delivery
       'Calendar': 'التقويم',
+      'My orders': 'طلباتي',
+      'App feedback': 'ملاحظات التطبيق',
       'My Account': 'حسابي',
       'Address': 'العنوان',
       'Support': 'الدعم',
@@ -487,6 +493,8 @@ class AppTranslations extends Translations {
       'SAVE': 'सहेजें',
       // order delivery
       'Calendar': 'कैलेंडर',
+      'My orders': 'मेरे ऑर्डर',
+      'App feedback': 'ऐप फीडबैक',
       'My Account': 'मेरा खाता',
       'Address': 'पता',
       'Support': 'सहायता',
