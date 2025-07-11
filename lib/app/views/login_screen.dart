@@ -1,4 +1,5 @@
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/controllers/auth_controller.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DeliveryAuthController());
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -16,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Background Circle
+            /// 🔵 Background Circle
             Positioned(
               top: -size.width * 0.2,
               left: -size.width * 0.6,
@@ -64,7 +66,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            // Scrollable Content
+            /// 🔽 Login Fields
             SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -77,38 +79,40 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
+                      controller: controller.usernameController,
                       style: const TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         hintText: 'Enter your username'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    TextField(
-                      style: const TextStyle(color: Colors.black),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your password'.tr,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                      ),
-                    ),
+                    Obx(() => TextField(
+                          controller: controller.passwordController,
+                          style: const TextStyle(color: Colors.black),
+                          obscureText: !controller.isPasswordVisible.value,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your password',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(controller.isPasswordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: controller.togglePasswordVisibility,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                          ),
+                        )),
                     const SizedBox(height: 8),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.forgot);
-                        },
+                        onTap: () => Get.toNamed(AppRoutes.forgot),
                         child: Text(
                           "Forgot Password?".tr,
                           style: TextStyle(
@@ -128,15 +132,11 @@ class LoginScreen extends StatelessWidget {
                             text: TextSpan(
                               style: const TextStyle(color: Colors.black),
                               children: [
-                                TextSpan(
-                                  text: "By signing up I agree to the ".tr,
-                                ),
+                                const TextSpan(text: "By signing up I agree to the "),
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Get.toNamed(AppRoutes.terms);
-                                    },
-                                  text: "Terms of use".tr,
+                                    ..onTap = () => Get.toNamed(AppRoutes.terms),
+                                  text: "Terms of use",
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
                                 TextSpan(text: " and ".tr),
@@ -151,26 +151,30 @@ class LoginScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: AppColors.activebgclr,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    Obx(() => SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              foregroundColor: AppColors.activebgclr,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            onPressed: controller.isLoading.value
+                                ? null
+                                : () => controller.login(),
+                            child: controller.isLoading.value
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : const Text(
+                                    "Login",
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                           ),
-                        ),
-                        onPressed: () {
-                          Get.offNamed(AppRoutes.home);
-                        },
-                        child: Text(
-                          "Login".tr,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
+                        )),
                   ],
                 ),
               ),
