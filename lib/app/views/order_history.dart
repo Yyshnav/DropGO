@@ -270,6 +270,7 @@ import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   @override
@@ -417,8 +418,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Order Received",
+                          "Order Received".tr,
                           style: TextStyle(color: theme.hintColor),
+                          
                         ),
                         Text(
                           "01:10 PM",
@@ -443,8 +445,9 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Delivery Time",
+                          "Delivery Time".tr,
                           style: TextStyle(color: theme.hintColor),
+                          
                         ),
                         Text(
                           "01:45 PM",
@@ -473,6 +476,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                   ),
                   child: const Text("Complaint"),
                 ),
+                OutlinedButton(onPressed: () {}, child: Text("Complaint".tr)),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -482,7 +486,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: const Text("Completed"),
+                 
+                  child: Text("Completed".tr),
                 ),
               ],
             ),

@@ -52,7 +52,7 @@ class IntroScreen2 extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 0.06),
                   child: Text(
-                    "Deliver Food\nFast,\nEarn Even\nFaster!",
+                    "${'Deliver Food'.tr}\n${'Fast,'.tr}\n${'Earn Even'.tr}\n${'Faster!'.tr}",
                     style: TextStyle(
                       fontSize: width * 0.085,
                       fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class IntroScreen2 extends StatelessWidget {
                     },
                     child: Center(
                       child: Text(
-                        "Next",
+                        "Next".tr,
                         style: TextStyle(fontSize: width * 0.04),
                       ),
                     ),

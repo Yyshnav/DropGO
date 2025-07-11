@@ -314,8 +314,9 @@ class ChatScreen extends StatelessWidget {
           ),
           onPressed: () => Get.back(),
         ),
+        
         title: Text(
-          'Customer Service',
+          'Customer Service'.tr,
           style: TextStyle(
             color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.bold,
@@ -340,9 +341,9 @@ class ChatScreen extends StatelessWidget {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem<String>(
+              PopupMenuItem<String>(
                 value: 'clear',
-                child: Text('Clear Chat'),
+                child: Text('Clear Chat'.tr),
               ),
             ],
           ),
@@ -410,8 +411,8 @@ class ChatScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 16.0, bottom: 4),
                     child: Row(
                       children: [
-                        const Text(
-                          'Typing',
+                        Text(
+                          'Typing'.tr,
                           style: TextStyle(color: Colors.grey),
                         ),
                         const SizedBox(width: 4),
@@ -464,7 +465,7 @@ class ChatScreen extends StatelessWidget {
                               color: isDark ? Colors.white38 : Colors.black12,
                             ),
                           ),
-                          hintText: 'Message...',
+                          hintText: 'Message...'.tr,
                           hintStyle: TextStyle(
                             color: isDark ? Colors.white38 : Colors.black54,
                           ),

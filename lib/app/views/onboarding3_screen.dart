@@ -41,7 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                   right: 0,
                   child: Center(
                     child: Text(
-                      "Tap. Pick. Deliver.",
+                      "Tap. Pick. Deliver.".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
@@ -60,7 +60,7 @@ class OnboardingScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Be a Eat Fit Partner",
+                        "Be a Eat Fit Partner".tr,
                         style: TextStyle(
                           fontSize: 28,
                           color: Colors.white,
@@ -69,7 +69,7 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "Get a Stable Monthly\nIncome!",
+                        "${'Get a Stable Monthly'.tr}\n${'Income!'.tr}",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ],
@@ -115,8 +115,8 @@ class OnboardingScreen extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed(AppRoutes.login);
                       },
-                      child: const Text(
-                        "Get Started",
+                      child: Text(
+                        "Get Started".tr,
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),

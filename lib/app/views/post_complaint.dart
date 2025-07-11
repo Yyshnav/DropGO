@@ -220,6 +220,7 @@
 import 'dart:io';
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PostComplaintScreen extends StatefulWidget {
@@ -242,8 +243,8 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
   }
 
   void _logComplaint() {
-    debugPrint("Complaint: ${_descriptionController.text}");
-    debugPrint("Image: ${_selectedImage?.path ?? 'No image selected'}");
+    debugPrint("${'Complaint'.tr}: ${_descriptionController.text}");
+    debugPrint("${'Image'.tr}: ${_selectedImage?.path ?? 'No image selected'.tr}");
   }
 
   @override
@@ -256,7 +257,7 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
           ? AppColors.darkBackground
           : AppColors.lightBackground,
       appBar: AppBar(
-        title: const Text("Post complaint"),
+        title: Text("Post complaint".tr),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -275,13 +276,10 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+           
             Text(
-              "Description",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: isDark ? AppColors.darkText : AppColors.black,
-              ),
+              "Description".tr,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: isDark ? AppColors.darkText : AppColors.black,),
             ),
             const SizedBox(height: 8),
 
@@ -302,15 +300,18 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                     color: isDark ? AppColors.darkText : AppColors.black,
                   ),
                   onChanged: (_) => setState(() {}),
+                  
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Enter your complaint...',
+                   
                     hintStyle: TextStyle(
                       color: isDark
                           ? AppColors.darkInactive
                           : AppColors.txtfldclr,
                     ),
                     counterText: '',
+                    hintText: 'Enter your complaint...'.tr,
+                    
                   ),
                 ),
               ),
@@ -344,6 +345,7 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                          
                             Icon(
                               Icons.image,
                               size: 32,
@@ -351,12 +353,13 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              "Upload Proof (optional)",
+                              "Upload Proof (optional)".tr,
                               style: TextStyle(
                                 color: isDark
                                     ? AppColors.darkInactive
                                     : Colors.grey,
                               ),
+                              
                             ),
                           ],
                         )
@@ -383,7 +386,7 @@ class _PostComplaintScreenState extends State<PostComplaintScreen> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text("Post", style: TextStyle(fontSize: 16)),
+                child: Text("Post".tr, style: TextStyle(fontSize: 16)),
               ),
             ),
           ],
@@ -402,7 +405,7 @@ class DashedRect extends StatelessWidget {
   final double gap;
   final double borderRadius;
 
-  const DashedRect({
+  DashedRect({
     required this.child,
     this.color = Colors.grey,
     this.strokeWidth = 1.0,

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 
-import 'package:get/get_core/src/get_main.dart';
-
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
 
@@ -94,7 +92,7 @@ class IntroScreen extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Set to GO,\n",
+                        text: "Set to GO,\n".tr,
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w700,
@@ -103,7 +101,7 @@ class IntroScreen extends StatelessWidget {
                       ),
                       TextSpan(
                         text:
-                            "         Ready to flow", // 4 spaces before "Ready"
+                            "         Ready to flow".tr,
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w600,
@@ -131,7 +129,7 @@ class IntroScreen extends StatelessWidget {
                       Get.toNamed(AppRoutes.onboarding2);
                     },
                     child: Center(
-                      child: Text("Next", style: TextStyle(fontSize: 16)),
+                      child: Text("Next".tr, style: TextStyle(fontSize: 16)),
                     ),
                   ),
                 ),

@@ -60,11 +60,12 @@ class _EditProfilescreenState extends State<EditProfilescreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         title: Text(
-          'Edit Profile',
+          'Edit Profile'.tr,
           style: TextStyle(
             color: Theme.of(context).textTheme.titleLarge?.color,
             fontWeight: FontWeight.w900,
           ),
+       
         ),
         iconTheme: IconThemeData(color: Theme.of(context).iconTheme.color),
       ),

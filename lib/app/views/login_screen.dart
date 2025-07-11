@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                       controller: controller.usernameController,
                       style: const TextStyle(color: Colors.black),
                       decoration: InputDecoration(
-                        hintText: 'Enter your username',
+                        hintText: 'Enter your username'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -114,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () => Get.toNamed(AppRoutes.forgot),
                         child: Text(
-                          "Forgot Password?",
+                          "Forgot Password?".tr,
                           style: TextStyle(
                             color: Colors.teal[700],
                             fontWeight: FontWeight.w500,
@@ -139,9 +139,9 @@ class LoginScreen extends StatelessWidget {
                                   text: "Terms of use",
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
-                                const TextSpan(text: " and "),
+                                TextSpan(text: " and ".tr),
                                 TextSpan(
-                                  text: "Privacy Policy.",
+                                  text: "Privacy Policy.".tr,
                                   style: TextStyle(color: Colors.teal[800]),
                                 ),
                               ],

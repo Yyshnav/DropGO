@@ -3,14 +3,15 @@ import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart';
 
 class VerifyCodeScreen extends StatelessWidget {
+  VerifyCodeScreen({super.key});
   final List<TextEditingController> codeControllers = List.generate(
     4,
     (index) => TextEditingController(),
   );
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class VerifyCodeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Check your email",
+              "Check your email".tr,
               style: TextStyle(
                 fontSize: Responsive.width(context) * 0.05,
                 fontWeight: FontWeight.bold,
@@ -39,7 +40,7 @@ class VerifyCodeScreen extends StatelessWidget {
             Responsive.h(context, 1),
             Text.rich(
               TextSpan(
-                text: "We sent a reset link to ",
+                text: "We sent a reset link to ".tr,
                 style: TextStyle(
                   fontSize: Responsive.width(context) * 0.035,
                   color: Colors.grey[700],
@@ -57,7 +58,7 @@ class VerifyCodeScreen extends StatelessWidget {
             ),
             Responsive.h(context, 1),
             Text(
-              "Enter 4 digit code that is mentioned in the email",
+              "Enter 4 digit code that is mentioned in the email".tr,
               style: TextStyle(
                 fontSize: Responsive.width(context) * 0.035,
                 color: Colors.grey[600],
@@ -114,7 +115,7 @@ class VerifyCodeScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Verify Code",
+                  "Verify Code".tr,
                   style: TextStyle(fontSize: Responsive.width(context) * 0.045),
                 ),
               ),
@@ -123,14 +124,14 @@ class VerifyCodeScreen extends StatelessWidget {
             Center(
               child: Text.rich(
                 TextSpan(
-                  text: "Haven’t got the email yet? ",
+                  text: "Haven’t got the email yet? ".tr,
                   style: TextStyle(
                     fontSize: Responsive.width(context) * 0.035,
                     color: Colors.grey[700],
                   ),
                   children: [
                     TextSpan(
-                      text: "Resend link",
+                      text: "Resend link".tr,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: AppColors.primary,

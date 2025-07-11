@@ -1,6 +1,7 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           children: [
             Responsive.h(context, 2),
             Text(
-              "Set a new password",
+              "Set a new password".tr,
               style: TextStyle(
                 fontSize: Responsive.width(context) * 0.05,
                 fontWeight: FontWeight.bold,
@@ -43,14 +44,14 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             Responsive.h(context, 1),
             Text.rich(
               TextSpan(
-                text: "Create a new password. ",
+                text: "Create a new password. ".tr,
                 style: TextStyle(
                   fontSize: Responsive.width(context) * 0.035,
                   color: Colors.grey[700],
                 ),
                 children: [
                   TextSpan(
-                    text: "Ensure it differs from previous ones for security.",
+                    text: "Ensure it differs from previous ones for security.".tr,
                     style: TextStyle(color: Colors.blue),
                   ),
                 ],
@@ -62,7 +63,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               obscureText: obscure1,
               style: TextStyle(color: AppColors.black),
               decoration: InputDecoration(
-                labelText: "Password",
+                labelText: "Password".tr,
                 labelStyle: TextStyle(
                   fontSize: Responsive.width(context) * 0.04,
                 ),
@@ -83,7 +84,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               controller: confirmPasswordController,
               obscureText: obscure2,
               decoration: InputDecoration(
-                labelText: "Confirm Password",
+                labelText: "Confirm Password".tr,
                 labelStyle: TextStyle(
                   fontSize: Responsive.width(context) * 0.04,
                 ),
@@ -115,7 +116,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   ),
                 ),
                 child: Text(
-                  "Update Password",
+                  "Update Password".tr,
                   style: TextStyle(fontSize: Responsive.width(context) * 0.045),
                 ),
               ),

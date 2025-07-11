@@ -273,7 +273,7 @@ class MyAccountScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
-          'My Account',
+          'My Account'.tr,
           style: TextStyle(
             color:
                 Theme.of(context).appBarTheme.foregroundColor ?? Colors.white,
@@ -313,7 +313,7 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     context,
                     image: "assets/images/terms.png",
-                    title: 'Terms and conditions',
+                    title: 'Terms and conditions'.tr,
                     onTap: () {
                       Get.toNamed(AppRoutes.terms);
                     },
@@ -321,7 +321,7 @@ class MyAccountScreen extends StatelessWidget {
                   _buildMenuItem(
                     context,
                     image: "assets/images/changepwd.png",
-                    title: 'Change password',
+                    title: 'Change password'.tr,
                     onTap: () {
                       Navigator.push(
                         context,

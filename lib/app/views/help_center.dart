@@ -153,11 +153,12 @@ class HelpCenterPage extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          'Help Center',
+          'Help Center'.tr,
           style: TextStyle(
             color: theme.textTheme.titleLarge?.color,
             fontWeight: FontWeight.bold,
           ),
+        
         ),
         actions: [
           IconButton(
@@ -174,7 +175,7 @@ class HelpCenterPage extends StatelessWidget {
             Responsive.h(context, 2),
             ContactTile(
               icon: 'assets/images/chatt.png',
-              label: 'Chat',
+              label: 'Chat'.tr,
               onTap: () {
                 Get.toNamed(AppRoutes.chat);
               },
@@ -182,7 +183,7 @@ class HelpCenterPage extends StatelessWidget {
             const SizedBox(height: 12),
             ContactTile(
               icon: 'assets/images/whatsapp.png',
-              label: 'WhatsApp',
+              label: 'WhatsApp'.tr,
               iconColor: Colors.teal,
               onTap: () {
                 // WhatsApp action
@@ -191,7 +192,7 @@ class HelpCenterPage extends StatelessWidget {
             const SizedBox(height: 12),
             ContactTile(
               icon: 'assets/images/website.png',
-              label: 'Website',
+              label: 'Website'.tr,
               onTap: () {
                 // Website action
               },
