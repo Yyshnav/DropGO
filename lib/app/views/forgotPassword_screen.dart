@@ -1,10 +1,12 @@
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/controllers/forgotpassword_controller.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
+  final ForgotPasswordController controller = Get.put(ForgotPasswordController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             SizedBox(height: 8),
             TextField(
               controller: emailController,
+              onChanged: (value) => controller.email.value = value,
               decoration: InputDecoration(
                 hintText: "Enter your email".tr,
                 hintStyle: TextStyle(color: AppColors.txtfldclr),
@@ -54,13 +57,14 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
+            Obx(() =>
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(AppRoutes.otp);
-                },
+                onPressed: controller.isLoading.value
+                    ? null
+                    : () => controller.submitForgotPassword(),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.lightBackground,
@@ -69,8 +73,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text("Reset Password".tr),
-              ),
+                child: controller.isLoading.value
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : Text("Reset Password".tr),
+              ),)
             ),
           ],
         ),
