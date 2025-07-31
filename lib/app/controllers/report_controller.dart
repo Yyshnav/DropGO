@@ -42,8 +42,8 @@ class EmergencyController extends GetxController {
         return;
       }
 
-      Position pos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation,
+      Position pos = await Geolocator.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high),
+        // desiredAccuracy: LocationAccuracy.bestForNavigation,
       );
 
       var placemarks = await placemarkFromCoordinates(pos.latitude, pos.longitude);

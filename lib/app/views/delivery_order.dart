@@ -18,6 +18,8 @@ class DropScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final String orderId = ''; 
+    controller.fetchOrderDetails(orderId);
 
     return Scaffold(
       appBar: AppBar(
@@ -164,9 +166,37 @@ class DropScreen extends StatelessWidget {
         if (!controller.isVehicleIconLoaded.value) {
           return const Center(child: CircularProgressIndicator());
         }
+
+        if (controller.deliveryOrder.value == null) {
+    return GoogleMap(
+      cloudMapId: '30bbabd0238e299ab41897f0',
+      onMapCreated: controller.onMapCreated,
+      initialCameraPosition: CameraPosition(
+        target: controller.currentPosition.value,
+        zoom: 15,
+      ),
+      markers: {
+        Marker(
+          markerId: const MarkerId("currentLocation"),
+          position: controller.currentPosition.value,
+          icon: controller.vehicleIcon,
+        ),
+      },
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
+      zoomGesturesEnabled: true,
+      zoomControlsEnabled: true,
+      tiltGesturesEnabled: false,
+      rotateGesturesEnabled: false,
+      minMaxZoomPreference: const MinMaxZoomPreference(12, 18),
+    );
+  }
+
+        final order = controller.deliveryOrder.value!;
         return Stack(
           children: [
             GoogleMap(
+              cloudMapId: '30bbabd0238e299ab41897f0',
               onMapCreated: controller.onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: controller.currentPosition.value,
@@ -214,28 +244,41 @@ class DropScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          "Order No. 12",
+                          "Order No. ${order.orderId}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.primary,
                           ),
                         ),
                         const SizedBox(height: 12),
+                        // GestureDetector(
+                        //   onTap: () => controller.toggleTile("delivery"),
+                        //   child: _expandableTile(
+                        //     icon: Icons.location_pin,
+                        //     color: Colors.green,
+                        //     title: "Trycode Innovations Kozhikode",
+                        //     subtitle: "second floor Thayyil Arcade",
+                        //     fullAddress:
+                        //         "Trycode Innovations, 2nd Floor, Thayyil Arcade, Kozhikode, Kerala 673002",
+                        //     isExpanded:
+                        //         controller.expandedTile.value == "delivery",
+                        //     buttonText: "View Delivery Map",
+                        //     controller: controller,
+                        //   ),
+                        // ),
                         GestureDetector(
-                          onTap: () => controller.toggleTile("delivery"),
-                          child: _expandableTile(
-                            icon: Icons.location_pin,
-                            color: Colors.green,
-                            title: "Trycode Innovations Kozhikode",
-                            subtitle: "second floor Thayyil Arcade",
-                            fullAddress:
-                                "Trycode Innovations, 2nd Floor, Thayyil Arcade, Kozhikode, Kerala 673002",
-                            isExpanded:
-                                controller.expandedTile.value == "delivery",
-                            buttonText: "View Delivery Map",
-                            controller: controller,
-                          ),
+                        onTap: () => controller.toggleTile("delivery"),
+                        child: _expandableTile(
+                          icon: Icons.location_pin,
+                          color: Colors.green,
+                          title: order.deliveryLocationName, 
+                          subtitle: order.deliveryAddress,
+                          fullAddress: order.deliveryAddress,
+                          isExpanded: controller.expandedTile.value == "delivery",
+                          buttonText: "View Delivery Map",
+                          controller: controller,
                         ),
+                      ),
                         const SizedBox(height: 12),
                         const Divider(),
                         Row(
@@ -243,7 +286,8 @@ class DropScreen extends StatelessWidget {
                             const Icon(Icons.storefront),
                             const SizedBox(width: 8),
                             Text(
-                              "BOMBAY HOTEL",
+                              // "BOMBAY HOTEL",
+                              order.pickupLocationName,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: isDark ? Colors.white : Colors.black87,
@@ -264,7 +308,8 @@ class DropScreen extends StatelessWidget {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                "201/D, Bombay Hotel Kozhikode, Corporation Road",
+                                order.pickupAddress,
+                                // "201/D, Bombay Hotel Kozhikode, Corporation Road",
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: isDark

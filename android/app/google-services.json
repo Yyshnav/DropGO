@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1055581450807",
+    "project_id": "dropgo-a03cb",
+    "storage_bucket": "dropgo-a03cb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055581450807:android:48389af17badeb143605b2",
+        "android_client_info": {
+          "package_name": "com.example.dropgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaZSnMWp_ReF_-mwoUCVLzouU_iK_kEmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

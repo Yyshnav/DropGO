@@ -32,5 +32,4 @@ void updateUser({
     image: image ?? user.value?.image,
   );
 }
-
 }

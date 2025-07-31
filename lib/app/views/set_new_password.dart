@@ -1,19 +1,16 @@
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
+import 'package:dropgo/app/controllers/newpassword_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/get.dart';
 
-class NewPasswordScreen extends StatefulWidget {
-  @override
-  _NewPasswordScreenState createState() => _NewPasswordScreenState();
-}
 
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
-  bool obscure1 = true;
-  bool obscure2 = true;
+class NewPasswordScreen extends StatelessWidget {
+  final String email;
+  NewPasswordScreen({required this.email});
 
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  final controller = Get.put(NewPasswordController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +55,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               ),
             ),
             Responsive.h(context, 4),
-            TextField(
-              controller: passwordController,
-              obscureText: obscure1,
+            Obx(() => TextField(
+              controller: controller.passwordController,
+              obscureText: controller.obscure1.value,
               style: TextStyle(color: AppColors.black),
               decoration: InputDecoration(
                 labelText: "Password".tr,
@@ -69,20 +66,20 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    obscure1 ? Icons.visibility_off : Icons.visibility,
+                    controller.obscure1.value ? Icons.visibility_off : Icons.visibility,
                     color: AppColors.txtfldclr,
                   ),
-                  onPressed: () => setState(() => obscure1 = !obscure1),
+                  onPressed: () => controller.toggleObscure1,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-            ),
+            )),
             Responsive.h(context, 2.5),
-            TextField(
-              controller: confirmPasswordController,
-              obscureText: obscure2,
+            Obx(() =>TextField(
+              controller: controller.confirmPasswordController,
+              obscureText: controller.obscure2.value,
               decoration: InputDecoration(
                 labelText: "Confirm Password".tr,
                 labelStyle: TextStyle(
@@ -90,24 +87,22 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    obscure2 ? Icons.visibility_off : Icons.visibility,
+                    controller.obscure2.value ? Icons.visibility_off : Icons.visibility,
                     color: AppColors.txtfldclr,
                   ),
-                  onPressed: () => setState(() => obscure2 = !obscure2),
+                  onPressed: () => controller.toggleObscure2,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-            ),
+            )),
             Responsive.h(context, 5),
             SizedBox(
               width: double.infinity,
               height: Responsive.height(context) * 0.065,
               child: ElevatedButton(
-                onPressed: () {
-                  // TODO: password update logic
-                },
+                onPressed: () => controller.updatePassword(email),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.lightBackground,

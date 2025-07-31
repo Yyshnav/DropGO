@@ -25,8 +25,8 @@ class DeliveryAuthController extends GetxController {
     }
 
     isLoading.value = true;
-
-    final error = await DeliveryAuthApis.login(
+    final authApi = DeliveryAuthApis();
+    final error = await authApi.login(
       username: username,
       password: password,
     );

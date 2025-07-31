@@ -57,6 +57,14 @@ dependencies:
   get_storage: ^2.1.1
   dio: ^5.8.0+1
   shared_preferences: ^2.5.3
+  connectivity_plus: ^6.1.4
+  web_socket_channel: ^3.0.3
+  location: ^8.0.1
+  uuid: ^4.5.1
+  mime: ^2.0.0
+  firebase_core: ^3.15.2
+  flutter_local_notifications: ^19.4.0
+  firebase_messaging: ^15.2.10
 
 dev_dependencies:
   flutter_test:

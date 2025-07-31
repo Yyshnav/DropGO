@@ -19,9 +19,12 @@ import 'package:dropgo/app/views/order_screen.dart';
 import 'package:dropgo/app/views/otp_scren.dart';
 import 'package:dropgo/app/views/otp_success_screen.dart';
 import 'package:dropgo/app/views/post_complaint.dart';
+import 'package:dropgo/app/views/set_new_password.dart';
 import 'package:dropgo/app/views/splash_screen.dart';
 import 'package:dropgo/app/views/report_emergency.dart';
 import 'package:dropgo/app/views/terms_cndtn_screen.dart';
+import 'package:dropgo/demotest.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 class AppRoutes {
@@ -48,30 +51,48 @@ class AppRoutes {
   static const changepwd = '/changepwd';
   static const complaint = '/complaint';
   static const appfeedback = '/appfeedback';
-
+  static const setnewpassword = '/setnewpassword';
+  static const demo = '/demo';
   static final routes = [
     GetPage(name: onboarding1, page: () => IntroScreen()),
     GetPage(name: onboarding2, page: () => IntroScreen2()),
     GetPage(name: onboarding, page: () => OnboardingScreen()),
     GetPage(name: login, page: () => LoginScreen()),
     GetPage(name: forgot, page: () => ForgotPasswordScreen()),
-    GetPage(name: otp, page: () => VerifyCodeScreen()),
+    // GetPage(name: otp, page: () => VerifyCodeScreen()),
+     GetPage(name: otp, page: () {
+    final String email = Get.arguments as String;
+    return VerifyCodeScreen(email: email);
+    },),
     GetPage(name: otpsuceess, page: () => PasswordChangedSuccessScreen()),
     GetPage(name: terms, page: () => DottedContainerScreen()),
     GetPage(name: splash, page: () => SplashScreen()),
     GetPage(name: home, page: () => DropScreen()),
     GetPage(name: myaccount, page: () => MyAccountScreen()),
-    GetPage(name: orderdetails, page: () => OrderDetailsPage()),
+    // GetPage(name: orderdetails, page: () => DetailedOrderPage()),
+    GetPage(name: orderdetails, page: () {
+    final String orderId = Get.arguments as String;
+    return DetailedOrderPage(orderId: orderId);
+    },),
     GetPage(name: success, page: () => SuccessScreen()),
     // GetPage(name: editprofile, page: () => EditProfilescreen()),
     GetPage(name: orderhistory, page: () => OrderHistoryScreen()),
     GetPage(name: help, page: () => HelpCenterPage()),
-    GetPage(name: chat, page: () => ChatScreen()),
+    // GetPage(name: chat, page: () => ChatScreen(orderId: orderId,)),
+    GetPage(name: chat, page: () {
+    final String orderId = Get.arguments as String;
+    return ChatScreen(orderId: orderId);
+    },),
     GetPage(name: reportemergency, page: () => ReportEmergencyScreen()),
     GetPage(name: account, page: () => MyAccountScreen()),
     GetPage(name: orderscreen, page: () => OrderScreen()),
     GetPage(name: changepwd, page: () => ChangePasswordScreen()),
     GetPage(name: complaint, page: () => PostComplaintScreen()),
     GetPage(name: appfeedback, page: () => FeedbackScreen()),
+    GetPage(name: demo, page: () => FlutterSoundExample()),
+    GetPage(name: setnewpassword, page: () {
+      final String email = Get.arguments as String;
+      return NewPasswordScreen(email: email,);
+       },),
   ];
 }
