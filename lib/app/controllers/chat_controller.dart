@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dropgo/app/constants/Api_constants.dart';
 import 'package:dropgo/app/constants/Api_service.dart';
 import 'package:dropgo/app/constants/chat_websocket.dart';
 import 'package:dropgo/app/models/chat_model.dart';
@@ -14,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 
 
 class ChatController extends GetxController {
@@ -108,8 +110,8 @@ void _handleIncoming(MessageModel msg) async {
 
   if (msg.mediaType == MediaType.audio && msg.mediaUrl != null) {
     // Save audio file locally and assign its path
-    final file = await saveBase64AudioToFile(msg.mediaUrl!);
-    msg.localPath = file.path;
+    final file = await getAudioFileFromInput(ApiConstants.baseUrl +msg.mediaUrl!);
+    msg.localPath = file!.path;
 
     print('📦 Incoming audio msg base64 length: ${msg.mediaUrl?.length}');
   }
@@ -132,17 +134,89 @@ void _handleIncoming(MessageModel msg) async {
   }
 }
 
-Future<File> saveBase64AudioToFile(String base64Str) async {
-  final bytes = base64Decode(base64Str.split(',').last);
-  final dir = await getTemporaryDirectory();
-  final path = '${dir.path}/${DateTime.now().millisecondsSinceEpoch}.aac';
-  final file = File(path);
-  await file.writeAsBytes(bytes);
-  return file;
+// Future<File?> saveBase64AudioToFile(String base64Str) async {
+//   try {
+//     print('Decoding base64 audio...');
+//     final bytes = base64Decode(base64Str.split(',').last);
+
+//     final dir = await getTemporaryDirectory();
+//     final filePath = '${dir.path}/${DateTime.now().millisecondsSinceEpoch}.aac';
+
+//     print('Saving to file: $filePath');
+//     final file = File(filePath);
+//     await file.writeAsBytes(bytes);
+
+//     print('File saved successfully: ${file.path}');
+//     return file;
+//   } catch (e, stackTrace) {
+//     print('Error saving base64 audio to file: $e');
+//     print('Stack trace: $stackTrace');
+//     return null;
+//   }
+// }
+
+
+Future<File?> getAudioFileFromInput( input) async {
+  try {
+    // Case 1: It's likely a base64 string
+    if (input.contains('base64,')) {
+      print('🔍 Detected base64 input');
+      try {
+        // Strip data URL header
+        final base64Data = input.split(',').last.trim().replaceAll('\n', '').replaceAll(' ', '');
+
+        // Decode
+        final bytes = base64Decode(base64Data);
+
+        // Save to temp file
+        final dir = await getTemporaryDirectory();
+        final path = '${dir.path}/${DateTime.now().millisecondsSinceEpoch}.aac';
+        final file = File(path);
+        await file.writeAsBytes(bytes);
+        print('✅ Base64 audio saved to: ${file.path}');
+        
+        return file;
+      } catch (e) {
+        print('❌ Base64 decode failed: $e');
+        return null;
+      }
+    }
+
+
+    // Case 2: Remote URL
+    if (input.startsWith('http')) {
+      print('🌐 Detected remote URL: $input');
+      final response = await http.get(Uri.parse(input));
+      if (response.statusCode == 200) {
+        final dir = await getTemporaryDirectory();
+        final path = '${dir.path}/${DateTime.now().millisecondsSinceEpoch}.aac';
+
+        final file = File(path);
+        await file.writeAsBytes(response.bodyBytes);
+        print('✅ Audio downloaded and saved to: ${file.path}');
+        return file;
+      } else {
+        print('❌ Failed to download file. Status code: ${response.statusCode}');
+        return null;
+      }
+    }
+
+    // Case 3: Local File Path
+    final file = File(input);
+    if (await file.exists()) {
+      print('📁 Using local file: ${file.path}');
+      return file;
+    } else {
+      print('❌ Local file not found: $input');
+      return null;
+    }
+
+  } catch (e, stackTrace) {
+    print('❌ Error processing audio input: $e');
+    print('🔍 Stack trace: $stackTrace');
+    return null;
+  }
 }
-
-
-
 
 
   void _handleTyping(SenderType who, bool typing) {
@@ -251,7 +325,8 @@ Future<File> saveBase64AudioToFile(String base64Str) async {
     text:  '',
     senderType: mySenderType,
     timestamp: now,
-    localPath: file.path,
+    mediaUrl:ApiConstants.baseUrl+file.path,
+    localPath: file.path, // Store local path for audio
     mediaType: type,
     isTemp: true,
   );

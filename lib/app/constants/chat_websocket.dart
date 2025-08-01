@@ -128,6 +128,7 @@ class ChatSocketService {
       throw Exception('WebSocket not connected');
     }
     final payload = {
+      'message_type': 'Text',
       'orderId': orderId,
       'text': message,
       'sender_type': senderTypeToString(senderType),
