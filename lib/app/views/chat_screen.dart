@@ -256,7 +256,23 @@ class ChatBubble extends StatelessWidget {
     Widget? mediaWidget;
     if (msg.mediaType == MediaType.image) {
       if (msg.mediaUrl != null && msg.mediaUrl!.isNotEmpty) {
-        mediaWidget = ClipRRect(
+        mediaWidget =msg.mediaUrl!.contains('http') 
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.file(
+                File(msg.mediaUrl!),
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
+                // loadingBuilder: (context, child, loadingProgress) {
+                //   if (loadingProgress == null) return child;
+                //   return const Center(child: CircularProgressIndicator());
+                // },
+                errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+              ),
+            )
+          :
+         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.network(
             '${ApiConstants.baseUrl}${msg.mediaUrl!}',
@@ -270,21 +286,13 @@ class ChatBubble extends StatelessWidget {
             errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
           ),
         );
-      }}  else if (msg.mediaType == MediaType.audio) {
+      }
+      }  else if (msg.mediaType == MediaType.audio) {
   if (msg.mediaUrl != null && msg.mediaUrl!.isNotEmpty) {
-    mediaWidget = FutureBuilder<File>(
-      future: controller.saveBase64AudioToFile(msg.mediaUrl!),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return const Text('Error loading audio');
-        } else if (!snapshot.hasData) {
-          return const Text('No audio file found');
-        }
-
-        final localPath = snapshot.data!;
-        return Obx(() {
+    print('...........................................................${msg.mediaUrl!}');
+    print('...........................................................${msg.localPath}');
+    mediaWidget= 
+        Obx(() {
           final isPlaying = controller.playingMap[msg.id]?.value ?? false;
           final position = controller.currentPosition(msg.id).value;
           final duration = controller.totalDuration(msg.id).value;
@@ -315,7 +323,8 @@ class ChatBubble extends StatelessWidget {
                     } else if (isPaused) {
                       controller.resumeAudio(msg.id);
                     } else {
-                      controller.playAudio(localPath.path, msg.id);
+                      print( 'Playing audio from URL: ${ApiConstants.baseUrl + msg.mediaUrl!}');
+                      controller.playAudio(msg.mediaUrl!, msg.id);
                     }
                   },
                 ),
@@ -338,8 +347,21 @@ class ChatBubble extends StatelessWidget {
             ),
           );
         });
-      },
-    );
+      
+    // mediaWidget = FutureBuilder<File?>(
+    //   future: controller.getAudioFileFromInput(msg.mediaUrl!),
+    //   builder: (context, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return const CircularProgressIndicator();
+    //     } else if (snapshot.hasError) {
+    //       print(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,${snapshot.error}');
+    //       return const Text('Error loading audio');
+    //     } else if (!snapshot.hasData) {
+    //       return const Text('No audio file found');
+    //     }
+
+        
+    // );
   } else {
     mediaWidget = const Text('Audio not available');
   }
