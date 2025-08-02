@@ -1,3 +1,4 @@
+import 'package:dropgo/app/constants/api_constants.dart';
 import 'package:intl/intl.dart';
 
 enum SenderType { user, deliveryBoy, unknown }
@@ -80,11 +81,19 @@ class MessageModel {
   factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
       id: (json['id']?.toString() ?? ''),
-      orderId: (json['order_id']?.toString() ?? json['orderId']?.toString() ?? ''),
+      orderId:
+          (json['order_id']?.toString() ?? json['orderId']?.toString() ?? ''),
       text: (json['text']?.toString() ?? ''),
       senderType: senderTypeFromString(json['sender_type']?.toString()),
-      timestamp: DateTime.parse(json['timestamp']?.toString() ?? DateTime.now().toIso8601String()),
-      mediaUrl: json['image']?.toString() ?? json['audio']?.toString(),
+      timestamp: DateTime.parse(
+        json['timestamp']?.toString() ?? DateTime.now().toIso8601String(),
+      ),
+      mediaUrl: json['image'] != null
+          ? ApiConstants.baseUrl + json['image'].toString()
+          : json['audio'] != null
+          ? ApiConstants.baseUrl + json['audio'].toString()
+          : '',
+
       localPath: null,
       mediaType: mediaTypeFromString(json['message_type']?.toString()),
     );

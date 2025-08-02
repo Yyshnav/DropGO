@@ -150,13 +150,7 @@ class DropScreen extends StatelessWidget {
                   label: "Support".tr,
                   selected: drawerController.selectedItem.value == "Support".tr,
                 ),
-                buildMenuItem(
-                  context,
-                  icon: Icons.feedback_outlined,
-                  label: "App feedback".tr,
-                  selected:
-                      drawerController.selectedItem.value == "App feedback".tr,
-                ),
+                
               ],
             ),
           ),

@@ -8,7 +8,7 @@ class DrawerControllerX extends GetxController {
     'My Account': AppRoutes.myaccount,
     'My orders': AppRoutes.orderhistory,
     'Support': AppRoutes.help,
-    'App feedback': AppRoutes.appfeedback, // Use the correct screen if available
+   
   };
 
   void setSelected(String item) {

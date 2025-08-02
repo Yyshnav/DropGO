@@ -256,7 +256,8 @@ class ChatBubble extends StatelessWidget {
     Widget? mediaWidget;
     if (msg.mediaType == MediaType.image) {
       if (msg.mediaUrl != null && msg.mediaUrl!.isNotEmpty) {
-        mediaWidget =msg.mediaUrl!.contains('http') 
+        
+        mediaWidget =!msg.mediaUrl!.contains('http') 
           ? ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.file(
@@ -264,10 +265,7 @@ class ChatBubble extends StatelessWidget {
                 width: 200,
                 height: 200,
                 fit: BoxFit.cover,
-                // loadingBuilder: (context, child, loadingProgress) {
-                //   if (loadingProgress == null) return child;
-                //   return const Center(child: CircularProgressIndicator());
-                // },
+                
                 errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
               ),
             )
@@ -275,7 +273,7 @@ class ChatBubble extends StatelessWidget {
          ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.network(
-            '${ApiConstants.baseUrl}${msg.mediaUrl!}',
+            '${msg.mediaUrl!}',
             width: 200,
             height: 200,
             fit: BoxFit.cover,
@@ -289,8 +287,8 @@ class ChatBubble extends StatelessWidget {
       }
       }  else if (msg.mediaType == MediaType.audio) {
   if (msg.mediaUrl != null && msg.mediaUrl!.isNotEmpty) {
-    print('...........................................................${msg.mediaUrl!}');
-    print('...........................................................${msg.localPath}');
+    // print('...........................................................${msg.mediaUrl!}');
+    // print('...........................................................${msg.localPath}');
     mediaWidget= 
         Obx(() {
           final isPlaying = controller.playingMap[msg.id]?.value ?? false;
@@ -323,7 +321,7 @@ class ChatBubble extends StatelessWidget {
                     } else if (isPaused) {
                       controller.resumeAudio(msg.id);
                     } else {
-                      print( 'Playing audio from URL: ${ApiConstants.baseUrl + msg.mediaUrl!}');
+                      print( 'Playing audio from URL.......................................................: ${msg.mediaUrl!}');
                       controller.playAudio(msg.mediaUrl!, msg.id);
                     }
                   },

@@ -195,145 +195,183 @@
 //   @override
 //   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 // }
-import 'dart:ui';
-import 'package:dropgo/app/constants/colors.dart';
-import 'package:dropgo/app/views/post_complaint.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class FeedbackScreen extends StatefulWidget {
-  @override
-  State<FeedbackScreen> createState() => _FeedbackScreenState();
-}
 
-class _FeedbackScreenState extends State<FeedbackScreen> {
-  final TextEditingController _commentController = TextEditingController();
-  double _rating = 4.0;
 
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: AppColors.primary,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        title: Text('Feedback'.tr),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: DashedRect(
-            borderRadius: 20,
-            color: isDark
-                ? Colors.white.withOpacity(0.3)
-                : Colors.white.withOpacity(0.5),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 32,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Share your experience".tr,
-                        style: TextStyle(
-                          color: isDark ? AppColors.darkText : Colors.white,
-                          fontSize: 16,
-                        ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'dart:ui';
+// import 'package:dropgo/app/constants/colors.dart';
+// import 'package:dropgo/app/views/post_complaint.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
+// class FeedbackScreen extends StatefulWidget {
+//   @override
+//   State<FeedbackScreen> createState() => _FeedbackScreenState();
+// }
+
+// class _FeedbackScreenState extends State<FeedbackScreen> {
+//   final TextEditingController _commentController = TextEditingController();
+//   double _rating = 4.0;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final isDark = Theme.of(context).brightness == Brightness.dark;
+//     final size = MediaQuery.of(context).size;
+
+//     return Scaffold(
+//       backgroundColor: AppColors.primary,
+//       appBar: AppBar(
+//         backgroundColor: AppColors.primary,
+//         elevation: 0,
+//         title: Text('Feedback'.tr),
+//         leading: IconButton(
+//           icon: const Icon(Icons.arrow_back),
+//           onPressed: () => Navigator.pop(context),
+//         ),
+//       ),
+//       body: Center(
+//         child: Padding(
+//           padding: const EdgeInsets.all(16),
+//           child: DashedRect(
+//             borderRadius: 20,
+//             color: isDark
+//                 ? Colors.white.withOpacity(0.3)
+//                 : Colors.white.withOpacity(0.5),
+//             child: ClipRRect(
+//               borderRadius: BorderRadius.circular(20),
+//               child: BackdropFilter(
+//                 filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+//                 child: Container(
+//                   width: double.infinity,
+//                   padding: const EdgeInsets.symmetric(
+//                     horizontal: 24,
+//                     vertical: 32,
+//                   ),
+//                   decoration: BoxDecoration(
+//                     color: Colors.white.withOpacity(0.1),
+//                     borderRadius: BorderRadius.circular(20),
+//                   ),
+//                   child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     children: [
+//                       Text(
+//                         "Share your experience".tr,
+//                         style: TextStyle(
+//                           color: isDark ? AppColors.darkText : Colors.white,
+//                           fontSize: 16,
+//                         ),
                       
-                      ),
-                      const SizedBox(height: 20),
-                      RatingBar.builder(
-                        initialRating: _rating,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemSize: size.width * 0.1,
-                        itemPadding: const EdgeInsets.symmetric(
-                          horizontal: 4.0,
-                        ),
-                        itemBuilder: (context, _) =>
-                            const Icon(Icons.star, color: Colors.amber),
-                        onRatingUpdate: (rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: isDark
-                              ? AppColors.darkCardBg.withOpacity(0.8)
-                              : Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                          controller: _commentController,
-                          maxLines: 4,
-                          style: TextStyle(
-                            color: isDark ? AppColors.darkText : Colors.black,
-                          ),
+//                       ),
+//                       const SizedBox(height: 20),
+//                       RatingBar.builder(
+//                         initialRating: _rating,
+//                         minRating: 1,
+//                         direction: Axis.horizontal,
+//                         allowHalfRating: false,
+//                         itemCount: 5,
+//                         itemSize: size.width * 0.1,
+//                         itemPadding: const EdgeInsets.symmetric(
+//                           horizontal: 4.0,
+//                         ),
+//                         itemBuilder: (context, _) =>
+//                             const Icon(Icons.star, color: Colors.amber),
+//                         onRatingUpdate: (rating) {
+//                           setState(() {
+//                             _rating = rating;
+//                           });
+//                         },
+//                       ),
+//                       const SizedBox(height: 20),
+//                       Container(
+//                         decoration: BoxDecoration(
+//                           color: isDark
+//                               ? AppColors.darkCardBg.withOpacity(0.8)
+//                               : Colors.white.withOpacity(0.8),
+//                           borderRadius: BorderRadius.circular(12),
+//                         ),
+//                         padding: const EdgeInsets.symmetric(horizontal: 12),
+//                         child: TextField(
+//                           controller: _commentController,
+//                           maxLines: 4,
+//                           style: TextStyle(
+//                             color: isDark ? AppColors.darkText : Colors.black,
+//                           ),
                          
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
+//                           decoration: InputDecoration(
+//                             border: InputBorder.none,
                             
-                            hintStyle: TextStyle(
-                              color: isDark
-                                  ? AppColors.darkInactive
-                                  : Colors.black54,
-                            ),
-                            hintText: 'Add your comments...'.tr,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            debugPrint("Rating: $_rating".tr);
-                            debugPrint("Comment: ${_commentController.text}".tr);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: Text("Accept".tr),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//                             hintStyle: TextStyle(
+//                               color: isDark
+//                                   ? AppColors.darkInactive
+//                                   : Colors.black54,
+//                             ),
+//                             hintText: 'Add your comments...'.tr,
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 24),
+//                       SizedBox(
+//                         width: double.infinity,
+//                         child: ElevatedButton(
+//                           onPressed: () {
+//                             debugPrint("Rating: $_rating".tr);
+//                             debugPrint("Comment: ${_commentController.text}".tr);
+//                           },
+//                           style: ElevatedButton.styleFrom(
+//                             backgroundColor: Colors.white,
+//                             foregroundColor: Colors.black,
+//                             padding: const EdgeInsets.symmetric(vertical: 14),
+//                             shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadius.circular(8),
+//                             ),
+//                           ),
+//                           child: Text("Accept".tr),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

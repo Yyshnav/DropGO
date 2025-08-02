@@ -50,7 +50,7 @@ class AppRoutes {
   static const orderscreen = '/orderscreen';
   static const changepwd = '/changepwd';
   static const complaint = '/complaint';
-  static const appfeedback = '/appfeedback';
+ 
   static const setnewpassword = '/setnewpassword';
   static const demo = '/demo';
   static final routes = [
@@ -88,7 +88,7 @@ class AppRoutes {
     GetPage(name: orderscreen, page: () => OrderScreen()),
     GetPage(name: changepwd, page: () => ChangePasswordScreen()),
     GetPage(name: complaint, page: () => PostComplaintScreen()),
-    GetPage(name: appfeedback, page: () => FeedbackScreen()),
+   
     GetPage(name: demo, page: () => FlutterSoundExample()),
     GetPage(name: setnewpassword, page: () {
       final String email = Get.arguments as String;
