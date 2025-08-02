@@ -7,6 +7,7 @@ import 'package:dropgo/app/constants/Api_constants.dart';
 import 'package:dropgo/app/constants/Api_service.dart';
 import 'package:dropgo/app/constants/chat_websocket.dart';
 import 'package:dropgo/app/models/chat_model.dart';
+import 'package:dropgo/demotest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
@@ -110,7 +111,7 @@ void _handleIncoming(MessageModel msg) async {
 
   if (msg.mediaType == MediaType.audio && msg.mediaUrl != null) {
     // Save audio file locally and assign its path
-    final file = await getAudioFileFromInput(ApiConstants.baseUrl +msg.mediaUrl!);
+    final file = await getAudioFileFromInput(msg.mediaUrl!);
     msg.localPath = file!.path;
 
     print('📦 Incoming audio msg base64 length: ${msg.mediaUrl?.length}');
@@ -309,7 +310,7 @@ Future<File?> getAudioFileFromInput( input) async {
     final file = File(recordedPath!);
     if (await file.exists()) {
       await _sendMedia(file, MediaType.audio);
-      await file.delete();
+      // await file.delete();
     }
 
     recordedPath = null;
@@ -325,7 +326,7 @@ Future<File?> getAudioFileFromInput( input) async {
     text:  '',
     senderType: mySenderType,
     timestamp: now,
-    mediaUrl:ApiConstants.baseUrl+file.path,
+    mediaUrl:file.path,
     localPath: file.path, // Store local path for audio
     mediaType: type,
     isTemp: true,
@@ -369,9 +370,13 @@ Future<File?> getAudioFileFromInput( input) async {
 }
 
 Future<void> playAudio(String path, String messageId) async {
+  print('parthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh....................$path');
   try {
-    await _player.openPlayer();
+   if (!_player.isOpen()) {
+  await _player.openPlayer();
+}
   } catch (e) {
+    print('__________________________________________________________$e');
     // Player is probably already open
   }
 
@@ -388,6 +393,7 @@ Future<void> playAudio(String path, String messageId) async {
 
   await _player.startPlayer(
     fromURI: path,
+    // codec: Codec.defaultCodec,
     whenFinished: () {
       playingMap[messageId]?.value = false;
       pausedMap[messageId]?.value = false;
