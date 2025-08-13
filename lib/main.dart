@@ -1,6 +1,7 @@
 import 'package:dropgo/app/constants/Api_constants.dart';
 import 'package:dropgo/app/constants/Api_service.dart';
 import 'package:dropgo/app/constants/token_interceptor.dart';
+import 'package:dropgo/app/controllers/deliveryorder_controller.dart';
 import 'package:dropgo/app/controllers/network_controller.dart';
 import 'package:dropgo/app/views/network_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ void main() async {
   Get.put(ThemeController());
   Get.put(NetworkController());
   Get.put(DeliveryAuthApis());
+  // Get.put(LocationController(), permanent: true);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );

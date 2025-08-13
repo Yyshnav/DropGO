@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:dropgo/app/constants/Api_constants.dart';
 import 'package:dropgo/app/constants/Api_service.dart';
 import 'package:dropgo/app/constants/colors.dart';
+import 'package:dropgo/app/constants/enpoints.dart';
 import 'package:dropgo/app/models/delivery_order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 import 'dart:math';
+import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -26,6 +30,7 @@ class LocationController extends GetxController {
   var deliveryOrder = Rxn<DeliveryOrder>();
   bool _mapReady = false;
   bool _routePending = false;
+  Timer? _timer;
   
 
 
@@ -42,13 +47,13 @@ class LocationController extends GetxController {
     super.onInit();
     _loadVehicleIcon();
     _startLocationUpdates();
-  }
-
-  @override
-  void onClose() {
-    _positionStreamSubscription?.cancel();
-    _mapController.dispose();
-    super.onClose();
+  //   Future.microtask(() async {
+    fetchLatestOrder();
+  //   // await fetchOrderDetails(orderId); // if needed
+  // });
+     _timer = Timer.periodic(Duration(seconds: 15), (_) {
+      fetchLatestOrder();
+    });
   }
 
   // ✅ Launch Phone Call
@@ -156,30 +161,7 @@ void _debouncedGetPolylineRoute() {
 }
 
   final authApi = DeliveryAuthApis();
-  // ✅ Fetch Order from Backend
-//   Future<void> fetchOrderDetails(String orderId) async {
-//     try {
-//       final order = await authApi.getOrderDetails(orderId); // Assuming static method
-//       // if (order != null) {
-//       if (order != null|| order!.orderId.isNotEmpty) { 
-//         deliveryOrder.value = order;
 
-//         currentPosition.value = LatLng(order.pickupLat!, order.pickupLng!);
-//         deliveryPosition = LatLng(order.deliveryLat!, order.deliveryLng!).obs;
-
-//         // getPolylineRoute();
-//         if (_mapReady) {
-//   getPolylineRoute();
-// } else {
-//   print("⚠️ Map not ready, skipping polyline draw in fetchOrderDetails");
-// }
-//       } else {
-//         Get.snackbar("Error", "Failed to load order details");
-//       }
-//     } catch (e) {
-//       Get.snackbar("Error", "Could not fetch order");
-//     }
-//   }
 
 Future<void> fetchOrderDetails(String orderId) async {
   try {
@@ -212,6 +194,95 @@ Future<void> fetchOrderDetails(String orderId) async {
   }
 }
 
+Dio get _dio => ApiConstants.dio;
+Future<void> fetchLatestOrder() async {
+  try {
+    print("📦 Fetching latest order...");
+    final response = await _dio.get(
+      ApiEndpoints.latestorders,
+      options: Options(headers: {'Authorization': 'Bearer ${Get.find<DeliveryAuthApis>().token}'}),
+    );
+
+    // print("📡 Response Status: ${response.statusCode}");
+    // print("📡 Response Data: ${response.data}");
+
+    if (response.statusCode == 200) {
+      final data = response.data;
+
+      if (data is List && data.isNotEmpty) {
+        // print("📦 Latest orders (list): $data");
+        deliveryOrder.value = DeliveryOrder.fromJson(data.first);
+        currentPosition.value = LatLng(deliveryOrder.value!.pickupLat!, deliveryOrder.value!.pickupLng!);
+        deliveryPosition.value = LatLng(deliveryOrder.value!.deliveryLat!, deliveryOrder.value!.deliveryLng!);
+        if (_mapReady) {
+          getPolylineRoute();
+        }
+      } else if (data is Map<String, dynamic>) {
+        // print("📦 Latest order (map): $data");
+        deliveryOrder.value = DeliveryOrder.fromJson(data);
+        currentPosition.value = LatLng(deliveryOrder.value!.pickupLat!, deliveryOrder.value!.pickupLng!);
+        deliveryPosition.value = LatLng(deliveryOrder.value!.deliveryLat!, deliveryOrder.value!.deliveryLng!);
+        if (_mapReady) {
+          getPolylineRoute();
+        }
+      } else {
+        // print("⚠️ No orders found or unexpected response type: ${data.runtimeType}");
+        deliveryOrder.value = null;
+        await setDeliveryBoyCurrentLocation();
+      }
+    } else {
+      // print("❌ Failed to fetch latest order: ${response.statusCode}");
+      deliveryOrder.value = null;
+      await setDeliveryBoyCurrentLocation();
+      Get.snackbar("Error", "Failed to fetch order: ${response.statusCode}");
+    }
+  } catch (e, s) {
+    print("❌ fetchLatestOrder error: $e");
+    print("❌ Stack trace: $s");
+    deliveryOrder.value = null;
+    await setDeliveryBoyCurrentLocation();
+    Get.snackbar("Error", "Could not fetch latest order");
+  }
+}
+
+
+// Future<void> fetchLatestOrder() async {
+//   try {
+//     // final prefs = await SharedPreferences.getInstance();
+//     // final token = prefs.getString('token');
+//     // if (token == null) return;
+  
+//     final response = await _dio.get(
+//       ApiEndpoints.latestorders,
+//       // options: Options(headers: {'Authorization': 'Bearer $token'}),
+//     );
+
+//     final List orders = response.data;
+//     Get.log(response.data);
+//     if (orders.isEmpty) {
+//       deliveryOrder.value = null;
+//       await setDeliveryBoyCurrentLocation();
+//       return;
+//     }
+
+//     final firstOrder = orders.first; // or filter for "pending"
+//     final order = DeliveryOrder.fromJson(firstOrder);
+
+//     deliveryOrder.value = order;
+//     currentPosition.value = LatLng(order.pickupLat!, order.pickupLng!);
+//     deliveryPosition.value = LatLng(order.deliveryLat!, order.deliveryLng!);
+
+//     if (_mapReady) {
+//       getPolylineRoute();
+//     }
+//    } catch (e, stack) {
+//     Get.log("fetchLatestOrder error: $e".toString());
+//     Get.log("Stack trace: $stack");
+//     Get.snackbar("Error", "Could not fetch latest order: $e");
+//   }
+// }
+
+
 Future<void> setDeliveryBoyCurrentLocation() async {
   // Use GPS to get current location
   Position position = await Geolocator.getCurrentPosition(
@@ -232,6 +303,7 @@ Future<void> setDeliveryBoyCurrentLocation() async {
 
   void onMapCreated(GoogleMapController controller) {
   _mapController = controller;
+  fetchLatestOrder();
   _mapReady = true;
   if (_routePending) {
     print("📍 Drawing pending polyline route");
@@ -253,49 +325,7 @@ Future<void> setDeliveryBoyCurrentLocation() async {
     _mapController.animateCamera(CameraUpdate.newLatLngZoom(deliveryPosition.value, 15));
   }
 
-  // Future<void> getPolylineRoute() async {
-  //   try {
-  //     final url = Uri.parse(
-  //       'https://maps.googleapis.com/maps/api/directions/json'
-  //       '?origin=${currentPosition.value.latitude},${currentPosition.value.longitude}'
-  //       '&destination=${deliveryPosition.value.latitude},${deliveryPosition.value.longitude}'
-  //       '&mode=driving'
-  //       '&key=$googleApiKey',
-  //     );
-
-  //     final response = await http.get(url);
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       final data = json.decode(response.body);
-  //       if (data['status'] == 'OK') {
-  //         final route = data['routes'][0];
-  //         final leg = route['legs'][0];
-
-  //         final encodedPolyline = route['overview_polyline']['points'];
-  //         polylineCoordinates.value = _decodePolyline(encodedPolyline);
-
-  //         navigationSteps.value = leg['steps'].map<Map<String, dynamic>>((step) {
-  //           final document = parse(step['html_instructions']);
-  //           final cleanInstruction = document.body?.text ?? step['html_instructions'];
-  //           return {
-  //             'instruction': cleanInstruction,
-  //             'distance': step['distance']['text'] ?? '',
-  //             'duration': step['duration']['text'] ?? '',
-  //           };
-  //         }).toList();
-
-  //         final bounds = _boundsFromLatLngList(polylineCoordinates);
-  //         _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-  //       } else {
-  //         Get.snackbar('Error', 'No route found');
-  //       }
-  //     } else {
-  //       Get.snackbar('Error', 'Route request failed');
-  //     }
-  //   } catch (e) {
-  //      print("❌ getPolylineRoute() exception: $e");
-  //     Get.snackbar('Error', 'Failed to fetch route');
-  //   }
-  // }
+  
   Future<void> getPolylineRoute() async {
   try {
     final originLat = currentPosition.value.latitude;
@@ -427,4 +457,11 @@ Future<void> setDeliveryBoyCurrentLocation() async {
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
     ),
   };
+  @override
+  void onClose() {
+    _positionStreamSubscription?.cancel();
+    _mapController.dispose();
+    _timer?.cancel();
+    super.onClose();
+  }
 }

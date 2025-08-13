@@ -17,7 +17,7 @@ import 'package:dropgo/app/constants/token_interceptor.dart';
 // }n 
 
 class ApiConstants {
-  static const String baseUrl = 'http://192.168.1.57:5000';
+  static const String baseUrl = 'http://192.168.1.36:5000';
   static final Dio dio = _createDio();
 
   static Dio _createDio() {

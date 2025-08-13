@@ -81,37 +81,36 @@ class OrderDetailModel {
   });
 
   factory OrderDetailModel.fromJson(Map<String, dynamic> json) {
-    final branch = json['branch'] ?? {};
-    final deliveryDetails = json['delivery_details'] ?? {};
-    final deliveryAddr = deliveryDetails['address'] ?? {};
+  final branch = json['branch'] ?? {};
+  final deliveryDetails = json['delivery_details'] ?? {};
+  final deliveryAddr = deliveryDetails['address'] ?? {};
 
-    // Parse items
-    final List<Map<String, dynamic>> parsedItems =
-        (json['order_item'] as List).map((item) {
-      final itemName = item['itemname'] ?? {};
-      return {
-        'name': itemName['name'] ?? 'Item',
-        'quantity': int.tryParse(item['quantity'] ?? '1') ?? 1,
-        'price': double.tryParse(item['price'] ?? '0') ?? 0,
-      };
-    }).toList();
+  // Parse items
+  final List<Map<String, dynamic>> parsedItems =
+      (json['order_item'] as List?)?.map((item) {
+            final itemName = item['itemname'] ?? {};
+            return {
+              'name': itemName['name']?.toString() ?? 'Item',
+              'quantity': int.tryParse(item['quantity']?.toString() ?? '1') ?? 1,
+              'price': double.tryParse(item['price']?.toString() ?? '0') ?? 0.0,
+            };
+          }).toList() ?? [];
 
-    return OrderDetailModel(
-      orderId: json['id'].toString(),
-      status: json['orderstatus'] ?? 'UNKNOWN',
-      customerName: deliveryDetails['name'] ?? 'Customer',
-      pickupLocation: branch['address'] ?? 'Unknown Pickup Location',
-      deliveryLocation: deliveryAddr['address'] ?? 'Unknown Delivery Location',
-      customerPhone: deliveryDetails['phone'] ?? '',
-      amount: (json['totalamount'] as num).toDouble(),
-      paymentMethod: json['paymentstatus'] ?? 'UNKNOWN',
-      items: parsedItems,
-      customerNote: deliveryDetails['instruction'] ?? '',
-
-      pickupLatitude: (branch['latitude'] ?? 0).toDouble(),
-      pickupLongitude: (branch['longitude'] ?? 0).toDouble(),
-      deliveryLatitude: (deliveryAddr['latitude'] ?? 0).toDouble(),
-      deliveryLongitude: (deliveryAddr['longitude'] ?? 0).toDouble(),
-    );
-  }
+  return OrderDetailModel(
+    orderId: json['id']?.toString() ?? '',
+    status: json['orderstatus']?.toString() ?? 'UNKNOWN',
+    customerName: deliveryDetails['name']?.toString() ?? 'Customer',
+    pickupLocation: branch['address']?.toString() ?? 'Unknown Pickup Location',
+    deliveryLocation: deliveryAddr['address']?.toString() ?? 'Unknown Delivery Location',
+    customerPhone: deliveryDetails['phone']?.toString() ?? '',
+    amount: double.tryParse(json['totalamount']?.toString() ?? '0') ?? 0.0,
+    paymentMethod: json['payment_method']?.toString() ?? 'UNKNOWN',
+    items: parsedItems,
+    customerNote: deliveryDetails['instruction']?.toString() ?? '',
+    pickupLatitude: double.tryParse(branch['latitude']?.toString() ?? '0') ?? 0.0,
+    pickupLongitude: double.tryParse(branch['longitude']?.toString() ?? '0') ?? 0.0,
+    deliveryLatitude: double.tryParse(deliveryAddr['latitude']?.toString() ?? '0') ?? 0.0,
+    deliveryLongitude: double.tryParse(deliveryAddr['longitude']?.toString() ?? '0') ?? 0.0,
+  );
+}
 }

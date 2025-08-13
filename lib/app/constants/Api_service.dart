@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dropgo/app/constants/api_constants.dart';
@@ -255,19 +256,9 @@ void setupInterceptors() {
     await prefs.remove('token');
     await prefs.remove('refresh');
   }
+  final List orders=[];
 
-  // Future<DeliveryOrder?> getOrderDetails(String orderId) async {
-  //   try {
-  //     final response = await _dio.get(ApiEndpoints.latestorders, options: Options(headers: {'Authorization': 'Bearer $token'}),);
-  //     print(response.data);
-  //     return DeliveryOrder.fromJson(response.data);
-  //   } catch (e) {
-  //     print("❌ Error fetching order details: $e");
-  //     return null;
-  //   }
-  // }
-
-Future<DeliveryOrder?> getOrderDetails(String orderId) async {
+  Future<DeliveryOrder?> getOrderDetails(String orderId) async {
   try {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
@@ -276,41 +267,30 @@ Future<DeliveryOrder?> getOrderDetails(String orderId) async {
       print("❌ No token found");
       return null;
     }
-
-    print("🟢 Token used for request: $token");
-
     final response = await _dio.get(
       ApiEndpoints.latestorders,
       options: Options(headers: {'Authorization': 'Bearer $token'}),
     );
 
-    print(response.data);
+    log(response.data.toString());
 
     final List data = response.data;
-    if (data.isNotEmpty) {
-      return DeliveryOrder.fromJson(data[0]); // ✅ Pick the first order
+    final matchingOrder = data.firstWhere(
+      (order) => order['id'].toString() == orderId,
+      orElse: () => null,
+    );
+
+    if (matchingOrder != null) {
+      return DeliveryOrder.fromJson(matchingOrder);
     }
 
+    log("⚠️ Order ID $orderId not found");
     return null;
   } catch (e) {
-    print("❌ Error fetching order details: $e");
+    log("❌ Error fetching order details: $e");
     return null;
   }
 }
-
-// Future<List<dynamic>> fetchOrders() async {
-//     try {
-//       final response = await _dio.get('/orders'); // Replace endpoint if needed
-
-//       if (response.statusCode == 200 && response.data is List) {
-//         return response.data;
-//       } else {
-//         throw Exception('Failed to fetch orders');
-//       }
-//     } catch (e) {
-//       throw Exception('API Error: $e');
-//     }
-//   }
 
 Future<List<OrderModel>> fetchAllOrders() async {
     try {
@@ -326,7 +306,7 @@ Future<List<OrderModel>> fetchAllOrders() async {
         ApiEndpoints.latestorders,
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
-
+      log('📦 Orders response======>>>>>: ${response.data}');
       if (response.statusCode == 200 && response.data is List) {
         final list = response.data as List;
         return list.map((e) => OrderModel.fromJson(e as Map<String, dynamic>)).toList();
@@ -342,7 +322,7 @@ Future<List<OrderModel>> fetchAllOrders() async {
 
    Future<OrderDetailModel> orderDetails(String orderId) async {
     final response = await _dio.get('${ApiEndpoints.orderDetails}/$orderId/');
-    print(response.data);
+    log('=============>>>>>>>${response.data}');
     if (response.statusCode == 200) {
       return OrderDetailModel.fromJson(response.data);
     } else {
@@ -354,7 +334,7 @@ Future<List<OrderModel>> fetchAllOrders() async {
   bool paymentDone = false,
   String? paymentType,
 }) async {
-    await _dio.post("${ApiEndpoints.orderStatus}/", data: {
+    await _dio.post("${ApiEndpoints.orderStatus}/$orderId/", data: {
       "order_id" : orderId,
       "status": status,
       "payment_done": paymentDone,
@@ -550,6 +530,21 @@ Future<List<MessageModel>> fetchHistory(String orderId) async {
     }
   }
 
+   Future<Response> submitFeedback(Map<String, dynamic> payload) async {
+    try {
+      final response = await _dio.post(ApiEndpoints.submitDeliveryFeedback, data: payload);
+      if (response.statusCode != 200 && response.statusCode != 201) {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          error: 'Failed to submit feedback: ${response.statusMessage}',
+        );
+      }
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 

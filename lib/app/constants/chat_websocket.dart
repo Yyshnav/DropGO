@@ -16,7 +16,7 @@ class ChatSocketService {
   String? _orderId;
   Stream? _stream;
   bool get isConnected => _channel != null;
-
+   
   MessageCallback? onMessage;
   TypingCallback? onTyping;
   ErrorCallback? onError;
@@ -28,7 +28,7 @@ class ChatSocketService {
   }) {
     _orderId = orderId;
     final uri = Uri.parse(
-      'ws://192.168.1.57:5000/ws/chat/$orderId/'
+      'ws://192.168.1.36:5000/ws/chat/$orderId/'
       '${token != null ? '?token=$token' : ''}',
     );
     

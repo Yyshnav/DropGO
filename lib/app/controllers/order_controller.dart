@@ -36,7 +36,7 @@ class OrderProgressController extends GetxController {
     timesMin.clear();
 
     for (final o in orders) {
-      final d = _haversineKm(o.pickupLat, o.pickupLng, o.dropLat, o.dropLng);
+      final d = _haversineKm(o.pickupLat!, o.pickupLng!, o.dropLat!, o.dropLng!);
       distancesKm.add(d);
 
       // simple ETA estimate @ 40 km/h average

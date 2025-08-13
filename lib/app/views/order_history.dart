@@ -349,11 +349,14 @@ class OrderHistoryScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    order.deliveryAddress,
-                    style: TextStyle(
-                      color: theme.textTheme.bodySmall?.color,
-                      fontSize: constraints.maxWidth * 0.035,
+                  SizedBox(
+                    width: Get.width * 0.7,
+                    child: Text(
+                      order.deliveryAddress,
+                      style: TextStyle(
+                        color: theme.textTheme.bodySmall?.color,
+                        fontSize: constraints.maxWidth * 0.035,
+                      ),
                     ),
                   ),
                 ],

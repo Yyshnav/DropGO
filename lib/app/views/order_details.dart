@@ -57,6 +57,8 @@ class DetailedOrderPage extends StatelessWidget {
     children: [
       Obx(() {
   return GoogleMap(
+    mapType: MapType.normal,
+    buildingsEnabled: true,
     initialCameraPosition: CameraPosition(
       target: controller.currentPosition.value,
       zoom: 14.0,
@@ -266,7 +268,7 @@ class OrderDetailsPage extends StatelessWidget {
                       Responsive.h(context, 1),
                       Text(
                         // "Bombay Hotel Kozhikode",
-                        order.pickupLocation,
+                        order.pickupLocation.toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 13,
@@ -284,12 +286,19 @@ class OrderDetailsPage extends StatelessWidget {
                         ),
                       ),
                       Responsive.h(context, 1),
-                      Text(
-                        // "Trycode Innovations Kozhikode",
-                        order.deliveryLocation,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 13,
+                      SizedBox(
+                        width: Get.width * 0.7,
+                        child: Text(
+                          // "Trycode Innovations Kozhikode",
+                          order.deliveryLocation.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 13,
+                            
+                            
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -447,6 +456,8 @@ class OrderDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                if (orderController.order.value?.status == 'ACCEPTED') ...[
                   // Obx(() => PaymentConfirmationSlider(isPaymentConfirmed: isPaymentDone)),
                    Obx(() {
               final isPaymentConfirmed = orderController.isPaymentConfirmed.value;
@@ -455,6 +466,8 @@ class OrderDetailsPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
+                    const SizedBox(height: 16),
                   SwitchListTile(
                     title: Text(
                       "Payment Delivered",
@@ -480,9 +493,17 @@ class OrderDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ],
+                  
                 ],
               );
             }),
+            ] else ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      "Payment not confirmed yet",
+                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                   if (voiceNoteUrl.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
@@ -576,7 +597,7 @@ class OrderDetailsPage extends StatelessWidget {
                   Responsive.h(context, 5),
                   Obx(() {
                     final isPaymentConfirmed = orderController.isPaymentConfirmed.value;
-              final selectedPaymentType = orderController.selectedPaymentType.value;
+                    final selectedPaymentType = orderController.selectedPaymentType.value;
                     if (orderController.isDelivered.value) {
                       return Container(
                         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -591,7 +612,9 @@ class OrderDetailsPage extends StatelessWidget {
                           ),
                         ),
                       );
-                    } else if (!orderController.isPickedUp.value) {
+                    } 
+                    // else if (!orderController.isPickedUp.value) {
+                    else if(orderController.order.value?.status == 'PENDING'){
                       return SlideAction(
                         text: "Slide to Confirm Pickup",
                         textStyle: TextStyle(
@@ -604,7 +627,8 @@ class OrderDetailsPage extends StatelessWidget {
                         onSubmit: () async{
                           // orderController.confirmPickup();
                           // await orderController.updateStatus(order.orderId, "picked_up");
-                          await orderController.updateStatus("OUT_FOR_DELIVERY");
+                          await orderController.updateStatus("ACCEPTED");
+                          await orderController.fetchOrderDetails(order.orderId);
 
                           return null;
                         },
@@ -637,7 +661,7 @@ class OrderDetailsPage extends StatelessWidget {
                     paymentDone: true,
                     paymentType: orderController.selectedPaymentType.value,
                   );
-                  Get.offAndToNamed(AppRoutes.success);
+                  
                   return null;
                 },
                       );
