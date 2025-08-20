@@ -5,6 +5,8 @@ import 'package:dropgo/app/controllers/deliveryorder_controller.dart';
 import 'package:dropgo/app/controllers/drawer_controller.dart';
 import 'package:dropgo/app/controllers/profile_controller.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,8 +20,10 @@ class DropScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final String orderId = ''; 
-    controller.fetchOrderDetails(orderId);
+    controller.fetchLatestOrder();
+    // final order = controller.deliveryOrder.value!;
+    // final String orderId = ''; 
+    // controller.fetchOrderDetails(orderId);
 
     return Scaffold(
       appBar: AppBar(
@@ -183,13 +187,17 @@ class DropScreen extends StatelessWidget {
       tiltGesturesEnabled: false,
       rotateGesturesEnabled: false,
       minMaxZoomPreference: const MinMaxZoomPreference(12, 18),
+      gestureRecognizers: {
+    Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+  },
     );
   }
 
         final order = controller.deliveryOrder.value!;
         return Stack(
           children: [
-            GoogleMap(
+            GoogleMap(mapType: MapType.normal,
+            buildingsEnabled: true,
               cloudMapId: '30bbabd0238e299ab41897f0',
               onMapCreated: controller.onMapCreated,
               initialCameraPosition: CameraPosition(
@@ -202,14 +210,16 @@ class DropScreen extends StatelessWidget {
               myLocationButtonEnabled: true,
               zoomGesturesEnabled: true,
               zoomControlsEnabled: true,
-              tiltGesturesEnabled: false,
+              tiltGesturesEnabled: true,
               rotateGesturesEnabled: false,
               minMaxZoomPreference: const MinMaxZoomPreference(10, 18),
             ),
             DraggableScrollableSheet(
               initialChildSize: 0.35,
               minChildSize: 0.2,
-              maxChildSize: 0.65,
+              maxChildSize: 0.45,
+              snap: true, // Enable snapping
+  snapSizes: const [0.2, 0.35, 0.45],
               builder: (context, scrollController) {
                 return Obx(
                   () => Container(
@@ -228,6 +238,7 @@ class DropScreen extends StatelessWidget {
                     ),
                     child: ListView(
                       controller: scrollController,
+                      // physics: const ClampingScrollPhysics(),
                       children: [
                         Center(
                           child: Container(
@@ -350,87 +361,91 @@ class DropScreen extends StatelessWidget {
     );
   }
 
-  Widget _expandableTile({
-    required IconData icon,
-    required Color color,
-    required String title,
-    required String subtitle,
-    required String fullAddress,
-    required bool isExpanded,
-    required String buttonText,
-    required LocationController controller,
-  }) {
-    final isDark = Theme.of(Get.context!).brightness == Brightness.dark;
+Widget _expandableTile({
+  required IconData icon,
+  required Color color,
+  required String title,
+  required String subtitle,
+  required String fullAddress,
+  required bool isExpanded,
+  required String buttonText,
+  required LocationController controller,
+}) {
+  final isDark = Theme.of(Get.context!).brightness == Brightness.dark;
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.5)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, color: color),
-              const SizedBox(width: 8),
-              Column(
+  return AnimatedContainer(
+    duration: const Duration(milliseconds: 300),
+    margin: const EdgeInsets.symmetric(vertical: 4),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: color.withOpacity(0.1),
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: color.withOpacity(0.5)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, color: color),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
+                    maxLines: 1,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isDark ? Colors.white : Colors.black87,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey[400] : Colors.black54,
-                    ),
-                  ),
+                  // Text(
+                  //   subtitle,
+                  //   maxLines: 1,
+                  //   style: TextStyle(
+                  //     fontSize: 12,
+                  //     color: isDark ? Colors.grey[400] : Colors.black54,
+                  //     overflow: TextOverflow.ellipsis,
+                  //   ),
+                  // ),
                 ],
-              ),
-            ],
-          ),
-          if (isExpanded) ...[
-            const SizedBox(height: 10),
-            Text(
-              fullAddress,
-              style: TextStyle(
-                fontSize: 12,
-                color: isDark ? Colors.white70 : Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: ElevatedButton(
-                onPressed: controller.animateToDelivery,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: color,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Text(
-                  buttonText,
-                  style: TextStyle(color: AppColors.lightBackground),
-                ),
               ),
             ),
           ],
+        ),
+        if (isExpanded) ...[
+          const SizedBox(height: 10),
+          Text(
+            fullAddress,
+            style: TextStyle(
+              fontSize: 12,
+              color: isDark ? Colors.white70 : Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: controller.animateToDelivery,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: color,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              ),
+              child: Text(
+                buttonText,
+                style: TextStyle(color: AppColors.lightBackground),
+              ),
+            ),
+          ),
         ],
-      ),
-    );
-  }
+      ],
+    ),
+  );
+}
 
   Widget buildMenuItem(
     BuildContext context, {

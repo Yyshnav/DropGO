@@ -8,7 +8,7 @@ class OrderHistoryItem {
   final String paymentStatus;
   final String receivedTime;
   final String deliveredTime;
-  final double totalAmount;
+  final String totalAmount;
 
   OrderHistoryItem({
     required this.id,
@@ -39,7 +39,9 @@ class OrderHistoryItem {
       paymentStatus: json['paymentstatus'] ?? "PENDING",
       receivedTime: json['created_at'] ?? "--:--",
       deliveredTime: json['updated_at'] ?? "--:--",
-      totalAmount: (json['totalamount'] ?? 0).toDouble(),
+      // totalAmount: (json['totalamount'] ?? 0).toDouble(),
+      totalAmount: (json['totalamount'] ?? 0).toString(),
+
     );
   }
 }

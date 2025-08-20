@@ -100,6 +100,7 @@ final Map<String, FlutterSoundPlayer> audioPlayers = {};
     _socket.onError = (err) {
       isConnected.value = false;
       Get.snackbar('WebSocket Error', err.toString());
+      print('WebSocket error: $err');
     };
 
     _socket.connect(orderId: orderId, token: token);
@@ -253,7 +254,7 @@ Future<File?> getAudioFileFromInput( input) async {
     try {
       if (!_socket.isConnected) {
         messages.removeWhere((m) => m.id == tempId);
-        // Get.snackbar('Error', 'WebSocket not connected. Check your connection.');
+        Get.snackbar('Error', 'WebSocket not connected. Check your connection.');
         isSending.value = false;
         return;
       }

@@ -74,7 +74,11 @@ class AppRoutes {
     final String orderId = Get.arguments as String;
     return DetailedOrderPage(orderId: orderId);
     },),
-    GetPage(name: success, page: () => SuccessScreen()),
+    // GetPage(name: success, page: () => SuccessScreen()),
+     GetPage(name: success, page: () {
+    final String orderId = Get.arguments as String;
+    return SuccessScreen(orderId: orderId);
+    },),
     // GetPage(name: editprofile, page: () => EditProfilescreen()),
     GetPage(name: orderhistory, page: () => OrderHistoryScreen()),
     GetPage(name: help, page: () => HelpCenterPage()),
