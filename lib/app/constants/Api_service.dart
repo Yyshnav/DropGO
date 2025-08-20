@@ -342,6 +342,26 @@ Future<List<OrderModel>> fetchAllOrders() async {
       });
   }
 
+  Future<void> updateDeliveryBoyLocation({
+    required double latitude,
+    required double longitude,
+  }) async {
+    try {
+      final token = await getToken();
+      final response = await _dio.post(
+        ApiEndpoints.updateLocation,
+        data: {
+          'latitude': latitude,
+          'longitude': longitude,
+        },
+        options: Options(headers: {'Authorization': 'Bearer $token'}),
+      );
+      log('Location update response: ${response.data}');
+    } catch (e) {
+      throw Exception('Failed to update location: $e');
+    }
+  }
+
   Future<List<OrderHistoryItem>> fetchOrderHistory() async {
     try {
       final response = await _dio.get(ApiEndpoints.orderHistory);

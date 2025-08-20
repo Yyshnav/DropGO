@@ -217,9 +217,9 @@ class DropScreen extends StatelessWidget {
             DraggableScrollableSheet(
               initialChildSize: 0.35,
               minChildSize: 0.2,
-              maxChildSize: 0.65,
+              maxChildSize: 0.45,
               snap: true, // Enable snapping
-  snapSizes: const [0.2, 0.35, 0.65],
+  snapSizes: const [0.2, 0.35, 0.45],
               builder: (context, scrollController) {
                 return Obx(
                   () => Container(
@@ -402,15 +402,15 @@ Widget _expandableTile({
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Text(
-                    subtitle,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.grey[400] : Colors.black54,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                  // Text(
+                  //   subtitle,
+                  //   maxLines: 1,
+                  //   style: TextStyle(
+                  //     fontSize: 12,
+                  //     color: isDark ? Colors.grey[400] : Colors.black54,
+                  //     overflow: TextOverflow.ellipsis,
+                  //   ),
+                  // ),
                 ],
               ),
             ),

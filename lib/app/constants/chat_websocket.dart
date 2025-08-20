@@ -22,76 +22,150 @@ class ChatSocketService {
   ErrorCallback? onError;
   VoidCallback? onDone;
 
-  void connect({
-    required String orderId,
-    String? token,
-  }) {
-    _orderId = orderId;
-    final uri = Uri.parse(
-      'ws://192.168.1.36:5000/ws/chat/$orderId/'
-      '${token != null ? '?token=$token' : ''}',
-    );
+void connect({
+  required String orderId,
+  String? token,
+}) async {
+  _orderId = orderId;
+  final effectiveToken = token ?? await DeliveryAuthApis.getToken();
+  if (effectiveToken == null || effectiveToken.isEmpty) {
+    print('❌ No valid token available');
+    Get.snackbar('Error', 'Unable to obtain authentication token');
+    return;
+  }
+  final uri = Uri(
+    scheme: 'ws',
+    host: '192.168.1.36',
+    port: 5000,
+    path: '/ws/chat/$orderId/',
+    queryParameters: {'token': effectiveToken},
+  );
+  print('Connecting to WebSocket: $uri');
+  try {
+    _channel = WebSocketChannel.connect(uri);
+    _stream = _channel!.stream;
+    _listen();
+    print('WebSocket connected');
+    _reconnectAttempts = 0;
+  } catch (e, stackTrace) {
+    print('❌ WebSocket connection failed: $e\nStack trace: $stackTrace');
+    onError?.call(e);
+    _reconnect();
+  }
+}
+//   void connect({
+//     required String orderId,
+//     String? token,
+//   }) {
+//     _orderId = orderId;
+//     // final uri = Uri.parse(
+//     //   'ws://192.168.1.36:5000/ws/chat/$orderId/'
+//     //   '${token != null ? '?token=$token' : ''}',
+//     // );
+//     final uri = Uri(
+//   scheme: 'ws',
+//   host: '192.168.1.36', // Use the correct IP
+//   port: 5000,
+//   path: '/ws/chat/$orderId/',
+//   queryParameters: token != null ? {'token': token} : null,
+// );
     
-    // Uri(
-    //   scheme: 'ws',
-    //   host: '192.168.1.50',
-    //   port: 5000,
-    //   path: '/ws/chat/$orderId/',
-    //   queryParameters: token != null ? {'token': token} : null,
-    // );
-    print('Connecting to WebSocket: $uri');
-    try {
-      _channel = WebSocketChannel.connect(uri);
-      _stream = _channel!.stream;
-      _listen();
-      print('WebSocket connected');
-      _reconnectAttempts = 0; 
-    } catch (e) {
-      print('❌ WebSocket connection failed: $e');
-      onError?.call(e);
-      _reconnect();
-    }
-  }
+//     // Uri(
+//     //   scheme: 'ws',
+//     //   host: '192.168.1.50',
+//     //   port: 5000,
+//     //   path: '/ws/chat/$orderId/',
+//     //   queryParameters: token != null ? {'token': token} : null,
+//     // );
+//     print('Connecting to WebSocket: $uri');
+//     try {
+//       _channel = WebSocketChannel.connect(uri);
+//       _stream = _channel!.stream;
+//       _listen();
+//       print('WebSocket connected');
+//       _reconnectAttempts = 0; 
+//     } catch (e) {
+//       print('❌ WebSocket connection failed: $e');
+//       onError?.call(e);
+//       _reconnect();
+//     }
+//   }
 
-  void _listen() {
-    _stream?.listen(
-      (event) {
-        try {
-          final json = jsonDecode(event);
-          final type = json['type']?.toString() ?? 'message';
-          print('Received WebSocket event: $json');
-          Get.log("=======================$json");
 
-          if (type == 'typing') {
-            onTyping?.call(
-              senderTypeFromString(json['sender_type'] ?? 'USER'),
-              json['is_typing'] == true,
-            );
-          } else {
-            // onMessage?.call(MessageModel.fromJson(json));
-            if (senderTypeFromString(json['sender_type']) == SenderType.user) {
-              onMessage?.call(MessageModel.fromJson(json));
-            } 
-          }
-        } catch (e) {
-          print('❌ Error processing WebSocket event: $e');
-          onError?.call(e);
+void _listen() {
+  _stream?.listen(
+    (event) {
+      print('Raw WebSocket event: $event');
+      try {
+        final json = jsonDecode(event);
+        print('Parsed WebSocket event: $json');
+        final type = json['type']?.toString() ?? 'message';
+        if (type == 'typing') {
+          onTyping?.call(
+            senderTypeFromString(json['sender_type'] ?? 'USER'),
+            json['is_typing'] == true,
+          );
+        } else {
+          onMessage?.call(MessageModel.fromJson(json));
         }
-      },
-      onDone: () {
-        print('WebSocket closed');
-        onDone?.call();
-        _channel = null;
-        _reconnect();
-      },
-      onError: (error) {
-        print('❌ WebSocket error: $error');
-        onError?.call(error);
-        _channel = null;
-        _reconnect();
-      },
-    );
-  }
+      } catch (e, stackTrace) {
+        print('❌ Error processing WebSocket event: $e\nStack trace: $stackTrace');
+        onError?.call(e);
+      }
+    },
+    onDone: () {
+      print('WebSocket closed with code: ${_channel?.closeCode}, reason: ${_channel?.closeReason}');
+      onDone?.call();
+      _channel = null;
+      _reconnect();
+    },
+    onError: (error, stackTrace) {
+      print('❌ WebSocket error: $error\nStack trace: $stackTrace');
+      onError?.call(error);
+      _channel = null;
+      _reconnect();
+    },
+  );
+}
+  // void _listen() {
+  //   _stream?.listen(
+  //     (event) {
+  //       try {
+  //         final json = jsonDecode(event);
+  //         final type = json['type']?.toString() ?? 'message';
+  //         print('Received WebSocket event: $json');
+  //         Get.log("=======================$json");
+
+  //         if (type == 'typing') {
+  //           onTyping?.call(
+  //             senderTypeFromString(json['sender_type'] ?? 'USER'),
+  //             json['is_typing'] == true,
+  //           );
+  //         } else {
+  //           // onMessage?.call(MessageModel.fromJson(json));
+  //           if (senderTypeFromString(json['sender_type']) == SenderType.user) {
+  //             onMessage?.call(MessageModel.fromJson(json));
+  //           } 
+  //         }
+  //       } catch (e) {
+  //         print('❌ Error processing WebSocket event: $e');
+  //         onError?.call(e);
+  //       }
+  //     },
+  //     onDone: () {
+  //       print('WebSocket closed');
+  //       onDone?.call();
+  //       _channel = null;
+  //       _reconnect();
+  //     },
+  //     onError: (error) {
+  //       print('❌ WebSocket error: $error');
+  //       onError?.call(error);
+  //       _channel = null;
+  //       _reconnect();
+  //     },
+  //   );
+  // }
 
   int _reconnectAttempts = 0;
   static const _maxReconnectAttempts = 10;

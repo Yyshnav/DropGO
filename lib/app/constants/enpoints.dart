@@ -17,4 +17,5 @@ class ApiEndpoints {
   static const String verifyOtp = '/Deliveryboyapp/verifyOTPAPIView/';
   static const String setnewpassword = '/Deliveryboyapp/resetPasswordAPIView/';
   static const String submitDeliveryFeedback = '/Deliveryboyapp/submitDeliveryFeedback/';
+  static const String updateLocation = '/Deliveryboyapp/delivery-boy/locationupdate/';
 }

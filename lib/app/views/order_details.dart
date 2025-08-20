@@ -51,6 +51,15 @@ class DetailedOrderPage extends StatelessWidget {
   //   LatLng(order.pickupLatitude, order.pickupLongitude),
   //   LatLng(order.deliveryLatitude, order.deliveryLongitude),
   // );
+  // if (order.pickupLatitude != null && order.pickupLongitude != null &&
+  //           order.deliveryLatitude != null && order.deliveryLongitude != null) {
+  //         controller.setPickupAndDrop(
+  //           LatLng(order.pickupLatitude, order.deliveryLongitude),
+  //           LatLng(order.deliveryLatitude, order.deliveryLongitude),
+  //         );
+  //       } else {
+  //         debugPrint("Invalid or missing coordinates in OrderDetailModel");
+  //       }
 
         // final order = controller.deliveryOrder.value!;
  return Stack(
@@ -155,20 +164,20 @@ class OrderDetailsPage extends StatelessWidget {
                           style: TextStyle(fontSize: 12, color: Colors.black54),
                         ),
                         const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            RatingBarIndicator(
-                              itemPadding: const EdgeInsets.only(right: 4),
-                              rating: 4.1,
-                              itemBuilder: (context, index) =>
-                                  const Icon(Icons.star, color: Colors.amber),
-                              itemCount: 5,
-                              itemSize: 18.0,
-                              direction: Axis.horizontal,
-                            ),
-                            const Text('4.1', style: TextStyle(fontSize: 12)),
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     RatingBarIndicator(
+                        //       itemPadding: const EdgeInsets.only(right: 4),
+                        //       rating: 4.1,
+                        //       itemBuilder: (context, index) =>
+                        //           const Icon(Icons.star, color: Colors.amber),
+                        //       itemCount: 5,
+                        //       itemSize: 18.0,
+                        //       direction: Axis.horizontal,
+                        //     ),
+                        //     const Text('4.1', style: TextStyle(fontSize: 12)),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

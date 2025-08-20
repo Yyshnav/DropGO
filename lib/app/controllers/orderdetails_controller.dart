@@ -5,7 +5,7 @@ import 'package:dropgo/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 
-class OrderController extends GetxController {
+class  OrderController extends GetxController {
   var order = Rxn<OrderDetailModel>();
   var isLoading = false.obs;
   var isPickedUp = false.obs;
