@@ -23,7 +23,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 // Background FCM handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("🔔 Background message: ${message.notification?.title}");
+  // print("🔔 Background message: ${message.notification?.title}");
 }
 
 void main() async {

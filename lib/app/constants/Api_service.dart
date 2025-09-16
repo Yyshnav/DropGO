@@ -47,8 +47,8 @@ class DeliveryAuthApis {
         final token1 = response.data['token'];
         token = token1;
         final refreshToken = response.data['refresh'];
-        print(token);
-        print(refreshToken);
+        // print(token);
+        // print(refreshToken);
         await _saveToken(token, refreshToken);
         return null; // success
       } else {
@@ -58,7 +58,7 @@ class DeliveryAuthApis {
       print("Login error: ${e.response?.data}");
       return e.response?.data['message'] ?? "Login failed";
     } catch (e) {
-      print("Unexpected login error: $e");
+      // print("Unexpected login error: $e");
       return "Something went wrong";
     }
   }
@@ -92,7 +92,7 @@ static Future<bool> refreshAccessToken() async {
   final refreshToken = prefs.getString('refresh');
 
   if (refreshToken == null) {
-    print("❌ No refresh token found");
+    // print("❌ No refresh token found");
     return false;
   }
 
@@ -102,13 +102,13 @@ static Future<bool> refreshAccessToken() async {
       data: {"refresh": refreshToken},
     );
 
-    print("🔁 Refresh token response: ${response.data}");
+    // print("🔁 Refresh token response: ${response.data}");
 
     if ((response.statusCode == 200 || response.statusCode == 201) &&
         response.data['access'] != null) {
       final newAccessToken = response.data['access']; // ✅ use 'token' instead of 'access'
       await prefs.setString('token', newAccessToken);
-      print("Token refreshed and saved");
+      // print("Token refreshed and saved");
       return true;
     } else {
       print("Invalid token refresh response");
@@ -182,7 +182,7 @@ void setupInterceptors() {
   static Future<DeliveryUser?> fetchProfile() async {
     try {
       final token = await getToken();
-      print(token);
+      // print(token);
 
       if (token == null || token.isEmpty) {
         print("Token not found!");
@@ -195,7 +195,7 @@ void setupInterceptors() {
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
 
-      print("Profile Response: ${response.data}");
+      // print("Profile Response: ${response.data}");
 
       if (response.statusCode == 200 || response.statusCode == 201 && response.data is Map) {
         return DeliveryUser.fromJson(response.data);
@@ -312,7 +312,7 @@ Future<List<OrderModel>> fetchAllOrders() async {
         return list.map((e) => OrderModel.fromJson(e as Map<String, dynamic>)).toList();
       }
 
-      print('⚠️ Unexpected orders response: ${response.statusCode} ${response.data}');
+      // print('⚠️ Unexpected orders response: ${response.statusCode} ${response.data}');
       return [];
     } catch (e) {
       print('❌ Error fetching orders: $e');

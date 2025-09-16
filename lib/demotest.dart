@@ -109,3 +109,38 @@ class _FlutterSoundExampleState extends State<FlutterSoundExample> {
     );
   }
 }
+
+
+
+// void _handleIncoming(MessageModel msg) async {
+//   final idx = messages.indexWhere((m) => m.id == msg.id);
+
+//   if (msg.mediaType == MediaType.audio && msg.mediaUrl != null) {
+//     final file = await getAudioFileFromInput(msg.mediaUrl!);
+//     msg.localPath = file?.path;
+//   }
+
+//   if (idx == -1) {
+//     // Try to find an existing temp message to replace
+//     final tempIdx = messages.indexWhere((m) =>
+//       m.isTemp &&
+//       m.senderType == msg.senderType &&
+//       (
+//         (m.text.isNotEmpty && m.text == msg.text) || // text match
+//         (m.mediaType == msg.mediaType && m.text.isEmpty) // for media-only messages
+//       )
+//     );
+
+//     if (tempIdx != -1) {
+//       // Replace temp with confirmed
+//       msg.isTemp = false;
+//       messages[tempIdx] = msg;
+//     } else {
+//       // If no match, just add
+//       messages.add(msg);
+//     }
+//   } else {
+//     // Update existing
+//     messages[idx] = msg;
+//   }
+// }
