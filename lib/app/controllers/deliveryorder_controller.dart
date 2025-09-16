@@ -352,9 +352,9 @@ Future<void> setDeliveryBoyCurrentLocation() async {
 
     final response = await http.get(url);
 
-    print("📡 API URL: $url");
-    print("📡 Status Code: ${response.statusCode}");
-    print("📡 Response Body: ${response.body}");
+    // print("📡 API URL: $url");
+    // print("📡 Status Code: ${response.statusCode}");
+    // print("📡 Response Body: ${response.body}");
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = json.decode(response.body);

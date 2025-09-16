@@ -80,7 +80,7 @@ class OrderCard extends StatelessWidget {
     final createdStr = _formatDateTime(order.createdAt);
 
     // Translate backend status -> UI text
-    final isActive = order.status.toUpperCase() == 'PENDING' || order.status.toUpperCase() == 'IN_PROGRESS';
+    final isActive = order.status.toUpperCase() == 'PENDING' || order.status.toUpperCase() == 'ACCEPTED';
     final badgeText = isActive ? "In Progress".tr : order.status.tr;
 
     return GestureDetector(

@@ -56,11 +56,13 @@ class OrderDetailModel {
   final String paymentMethod;
   final List<Map<String, dynamic>> items;
   final String customerNote;
+  final String? deliveryinstruction;
 
   final double pickupLatitude;
   final double pickupLongitude;
   final double deliveryLatitude;
   final double deliveryLongitude;
+  final String? orderstatus;
 
   OrderDetailModel({
     required this.orderId,
@@ -73,11 +75,13 @@ class OrderDetailModel {
     required this.paymentMethod,
     required this.items,
     required this.customerNote,
+    this.deliveryinstruction,
 
     required this.pickupLatitude,
     required this.pickupLongitude,
     required this.deliveryLatitude,
     required this.deliveryLongitude,
+    required this.orderstatus,
   });
 
   factory OrderDetailModel.fromJson(Map<String, dynamic> json) {
@@ -107,6 +111,8 @@ class OrderDetailModel {
     paymentMethod: json['payment_method']?.toString() ?? 'UNKNOWN',
     items: parsedItems,
     customerNote: deliveryDetails['instruction']?.toString() ?? '',
+    deliveryinstruction: json['voice_instruction']?.toString(),
+    orderstatus: json['orderstatus']?.toString(),
     pickupLatitude: double.tryParse(branch['latitude']?.toString() ?? '0') ?? 0.0,
     pickupLongitude: double.tryParse(branch['longitude']?.toString() ?? '0') ?? 0.0,
     deliveryLatitude: double.tryParse(deliveryAddr['latitude']?.toString() ?? '0') ?? 0.0,

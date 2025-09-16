@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:dropgo/app/constants/Api_constants.dart';
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/constants/custom_size.dart';
 import 'package:dropgo/app/constants/payment_slider.dart';
@@ -222,7 +223,8 @@ class OrderDetailsPage extends StatelessWidget {
                             vertical: 6,
                           ),
                           child: Text(
-                            'Pending'.tr,
+                            // 'Pending'.tr,
+                            order.orderstatus ?? 'Pending'.tr,
                             style: TextStyle(
                               color: AppColors.lightyellowBg,
                               fontSize: 10,
@@ -528,6 +530,14 @@ class OrderDetailsPage extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
+                          if (order.deliveryinstruction != null && order.deliveryinstruction!.isNotEmpty)...[
+                            // Text(
+                            //   "Listen",
+                            //   style: TextStyle(
+                            //     color: AppColors.primary,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                           ValueListenableBuilder<bool>(
                             valueListenable: isPlaying,
                             builder: (context, playing, _) {
@@ -543,15 +553,18 @@ class OrderDetailsPage extends StatelessWidget {
                                   if (playing) {
                                     await audioPlayer.pause();
                                   } else {
+                                     String url = order.deliveryinstruction!.startsWith("/media")
+                ? "${ApiConstants.baseUrl}${order.deliveryinstruction!}"
+                : order.deliveryinstruction!;
                                     await audioPlayer.play(
-                                      UrlSource(voiceNoteUrl),
+                                      UrlSource(url),
                                     );
                                   }
                                   isPlaying.value = !playing;
                                 },
                               );
                             },
-                          ),
+                          ),]
                         ],
                       ),
                     ),
@@ -670,6 +683,7 @@ class OrderDetailsPage extends StatelessWidget {
                     paymentDone: true,
                     paymentType: orderController.selectedPaymentType.value,
                   );
+                  print('++++++++++++++++++++++++++>>>>>>>>>>>>>>>${orderController.selectedPaymentType.value}');
                   
                   return null;
                 },
