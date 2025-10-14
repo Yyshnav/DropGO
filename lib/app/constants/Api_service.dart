@@ -9,6 +9,7 @@ import 'package:dropgo/app/models/chat_model.dart';
 import 'package:dropgo/app/models/delivery_order_model.dart';
 import 'package:dropgo/app/models/order_datail_model.dart';
 import 'package:dropgo/app/models/order_history_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as p;
 
@@ -50,6 +51,10 @@ class DeliveryAuthApis {
         // print(token);
         // print(refreshToken);
         await _saveToken(token, refreshToken);
+        final fcmToken = await FirebaseMessaging.instance.getToken();
+        if (fcmToken != null) {
+          await sendtoken(fcmToken);
+        }
         return null; // success
       } else {
         return response.data['message'] ?? "Login failed";
@@ -58,7 +63,7 @@ class DeliveryAuthApis {
       print("Login error: ${e.response?.data}");
       return e.response?.data['message'] ?? "Login failed";
     } catch (e) {
-      // print("Unexpected login error: $e");
+      print("Unexpected login error: $e");
       return "Something went wrong";
     }
   }
@@ -335,7 +340,7 @@ Future<List<OrderModel>> fetchAllOrders() async {
   String? paymentType,
 }) async {
     await _dio.post("${ApiEndpoints.orderStatus}/$orderId/", data: {
-      "order_id" : orderId,
+      "order_id": int.tryParse(orderId) ?? orderId,
       "status": status,
       "payment_done": paymentDone,
       "payment_type": paymentType ?? "",
@@ -525,6 +530,22 @@ Future<List<MessageModel>> fetchHistory(String orderId) async {
       return false;
     }
   }
+Future<bool> sendtoken(String token) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final authToken = prefs.getString('token');
+      final response = await _dio.post(
+        ApiEndpoints.sendFcmToken,
+        data: {'fcm_token': token},
+        options: Options(headers: {'Authorization': 'Bearer $authToken'}),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print('OTP resend failed: $e');
+      return false;
+    }
+  }
 
   Future<bool> updatePassword({
     required String email,
@@ -563,6 +584,34 @@ Future<List<MessageModel>> fetchHistory(String orderId) async {
       return response;
     } catch (e) {
       rethrow;
+    }
+  }
+
+  Future<void> postComplaint({
+    required int orderId,
+    required String description,
+    File? image,
+  }) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "order_id": orderId,
+        "description": description,
+        if (image != null)
+          "image": await MultipartFile.fromFile(image.path),
+      });
+
+      final response = await _dio.post(
+        ApiEndpoints.postComplaint,
+        data: formData,
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return;
+      } else {
+        throw Exception("Failed to submit complaint");
+      }
+    } catch (e) {
+      throw Exception("Error: $e");
     }
   }
 }

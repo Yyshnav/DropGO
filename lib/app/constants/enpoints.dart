@@ -18,4 +18,6 @@ class ApiEndpoints {
   static const String setnewpassword = '/Deliveryboyapp/resetPasswordAPIView/';
   static const String submitDeliveryFeedback = '/Deliveryboyapp/submitDeliveryFeedback/';
   static const String updateLocation = '/Deliveryboyapp/delivery-boy/locationupdate/';
+  static const String postComplaint = '/Deliveryboyapp/postComplaintAPIView/';
+  static const String sendFcmToken = '/Userapp/update-fcm-token/';
 }

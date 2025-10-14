@@ -108,15 +108,19 @@ class OrderDetailsPage extends StatelessWidget {
   final orderController = Get.put(OrderController());
   final AudioPlayer audioPlayer = AudioPlayer();
   final ValueNotifier<bool> isPlaying = ValueNotifier<bool>(false);
+  
   final String voiceNoteUrl =
       "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
   final String deliveryNote =
       "Please leave the parcel at the reception if I’m not available.";
 
-  final RxBool isPaymentDone = false.obs;    
+  final RxBool isPaymentDone = false.obs;
 
   @override
   Widget build(BuildContext context) {
+    audioPlayer.onPlayerComplete.listen((event) {
+  isPlaying.value = false;
+});
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDark ? Colors.white : Colors.black;
     final subtitleColor = isDark ? Colors.grey[400] : Colors.black54;
@@ -125,7 +129,7 @@ class OrderDetailsPage extends StatelessWidget {
 
     return 
        Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 14.0),
         child: SingleChildScrollView(
           controller: scrollController,
           child: Column(
@@ -136,7 +140,7 @@ class OrderDetailsPage extends StatelessWidget {
           
               // User Info Row
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipOval(
                     child: Image.asset(
@@ -148,22 +152,22 @@ class OrderDetailsPage extends StatelessWidget {
                   ),
           
                   const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                  // Expanded(
+                  //   child: Column(
+                  //     // crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
                         Text(
                           order.customerName,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 15,
                           ),
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "124 Deliveries".tr,
-                          style: TextStyle(fontSize: 12, color: Colors.black54),
-                        ),
+                        // const SizedBox(height: 4),
+                        // Text(
+                        //   "124 Deliveries".tr,
+                        //   style: TextStyle(fontSize: 12, color: Colors.black54),
+                        // ),
                         const SizedBox(height: 6),
                         // Row(
                         //   children: [
@@ -179,32 +183,33 @@ class OrderDetailsPage extends StatelessWidget {
                         //     const Text('4.1', style: TextStyle(fontSize: 12)),
                         //   ],
                         // ),
-                      ],
-                    ),
-                  ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Responsive.w(context, 3),
                   Row(
                     children: [
                       CircleAvatar(
-                        radius: 18,
+                        radius: 17,
                         backgroundColor: Color(0xFFFEEBDB),
                         child: IconButton(
                           onPressed: () {},
                           icon: Image.asset(
                             'assets/images/call.png',
-                            height: 16,
-                            width: 16,
+                            height: 15,
+                            width: 15,
                           ),
                         ),
                       ),
-                      Responsive.w(context, 5),
+                      Responsive.w(context, 4.5),
                       CircleAvatar(
-                        radius: 18,
+                        radius: 17,
                         backgroundColor: Color(0xFFFEEBDB),
                         child: IconButton(
                           icon: Image.asset(
                             'assets/images/chat.png',
-                            height: 16,
-                            width: 16,
+                            height: 15,
+                            width: 15,
                           ),
                           onPressed: () {
                             Get.toNamed(AppRoutes.chat, arguments: order.orderId);
@@ -263,7 +268,7 @@ class OrderDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Responsive.w(context, 8),
+                  Responsive.w(context, 6.5),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -277,12 +282,17 @@ class OrderDetailsPage extends StatelessWidget {
                         ),
                       ),
                       Responsive.h(context, 1),
-                      Text(
-                        // "Bombay Hotel Kozhikode",
-                        order.pickupLocation.toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 13,
+                      SizedBox(
+                        width: Get.width * 0.7,
+                        child: Text(
+                          // "Bombay Hotel Kozhikode",
+                          order.pickupLocation.toString(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 13,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
           
@@ -468,7 +478,7 @@ class OrderDetailsPage extends StatelessWidget {
                     ],
                   ),
 
-                if (orderController.order.value?.status == 'ACCEPTED') ...[
+                if (orderController.order.value?.status == 'PICKED') ...[
                   // Obx(() => PaymentConfirmationSlider(isPaymentConfirmed: isPaymentDone)),
                    Obx(() {
               final isPaymentConfirmed = orderController.isPaymentConfirmed.value;
@@ -636,7 +646,7 @@ class OrderDetailsPage extends StatelessWidget {
                       );
                     } 
                     // else if (!orderController.isPickedUp.value) {
-                    else if(orderController.order.value?.status == 'PENDING'){
+                    else if(orderController.order.value?.status == 'ASSIGNED' || orderController.order.value?.status == 'Assigned') {
                       return SlideAction(
                         text: "Slide to Confirm Pickup",
                         textStyle: TextStyle(
@@ -649,7 +659,7 @@ class OrderDetailsPage extends StatelessWidget {
                         onSubmit: () async{
                           // orderController.confirmPickup();
                           // await orderController.updateStatus(order.orderId, "picked_up");
-                          await orderController.updateStatus("ACCEPTED");
+                          await orderController.updateStatus("PICKED");
                           await orderController.fetchOrderDetails(order.orderId);
 
                           return null;
