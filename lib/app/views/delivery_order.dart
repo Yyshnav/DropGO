@@ -20,7 +20,7 @@ class DropScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    controller.fetchLatestOrder();
+    // Avoid fetching on build to prevent running on app start/login
     // final order = controller.deliveryOrder.value!;
     // final String orderId = ''; 
     // controller.fetchOrderDetails(orderId);

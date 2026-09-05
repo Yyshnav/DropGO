@@ -1,3 +1,192 @@
+// import 'package:dropgo/app/constants/colors.dart';
+// import 'package:dropgo/app/controllers/auth_controller.dart';
+// import 'package:dropgo/app/routes/app_routes.dart';
+// import 'package:flutter/gestures.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// class LoginScreen extends StatelessWidget {
+//   const LoginScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final controller = Get.put(DeliveryAuthController());
+//     final size = MediaQuery.of(context).size;
+
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: SafeArea(
+//         child: Stack(
+//           children: [
+//             /// 🔵 Background Circle
+//             Positioned(
+//               top: -size.width * 0.2,
+//               left: -size.width * 0.6,
+//               child: Container(
+//                 width: size.width * 1.5,
+//                 height: size.width * 1.5,
+//                 decoration: const BoxDecoration(
+//                   shape: BoxShape.circle,
+//                   gradient: LinearGradient(
+//                     colors: [Color(0xFFFFF7EC), Color(0xFF006970)],
+//                     begin: Alignment.topLeft,
+//                     end: Alignment.bottomRight,
+//                   ),
+//                 ),
+//                 child: Stack(
+//                   children: [
+//                     ...List.generate(14, (index) {
+//                       final double top = (index * 30) % (size.width * 1.2);
+//                       final double left = (index * 80) % (size.width * 1.3);
+//                       return Positioned(
+//                         top: top,
+//                         left: left,
+//                         child: Container(
+//                           width: 4,
+//                           height: 4,
+//                           decoration: const BoxDecoration(
+//                             color: Colors.white,
+//                             shape: BoxShape.circle,
+//                           ),
+//                         ),
+//                       );
+//                     }),
+//                     Align(
+//                       alignment: const Alignment(1.1, 0.0),
+//                       child: Transform.translate(
+//                         offset: Offset(0, size.height * 0.02),
+//                         child: Image.asset(
+//                           'assets/images/Group (1).png',
+//                           height: size.height * 0.25,
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+
+//             /// 🔽 Login Fields
+//             SingleChildScrollView(
+//               child: Padding(
+//                 padding: EdgeInsets.only(
+//                   top: size.height * 0.55,
+//                   left: 24,
+//                   right: 24,
+//                   bottom: 40,
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     TextField(
+//                       controller: controller.usernameController,
+//                       style: const TextStyle(color: Colors.black),
+//                       decoration: InputDecoration(
+//                         hintText: 'Enter your username'.tr,
+//                         border: OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(8),
+//                         ),
+//                         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+//                       ),
+//                     ),
+//                     const SizedBox(height: 16),
+//                     Obx(() => TextField(
+//                           controller: controller.passwordController,
+//                           style: const TextStyle(color: Colors.black),
+//                           obscureText: !controller.isPasswordVisible.value,
+//                           decoration: InputDecoration(
+//                             hintText: 'Enter your password',
+//                             border: OutlineInputBorder(
+//                               borderRadius: BorderRadius.circular(8),
+//                             ),
+//                             suffixIcon: IconButton(
+//                               icon: Icon(controller.isPasswordVisible.value
+//                                   ? Icons.visibility
+//                                   : Icons.visibility_off),
+//                               onPressed: controller.togglePasswordVisibility,
+//                             ),
+//                             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+//                           ),
+//                         )),
+//                     const SizedBox(height: 8),
+//                     Align(
+//                       alignment: Alignment.centerRight,
+//                       child: GestureDetector(
+//                         onTap: () => Get.toNamed(AppRoutes.forgot),
+//                         child: Text(
+//                           "Forgot Password?".tr,
+//                           style: TextStyle(
+//                             color: Colors.teal[700],
+//                             fontWeight: FontWeight.w500,
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                     const SizedBox(height: 12),
+//                     Row(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Checkbox(value: true, onChanged: (val) {}),
+//                         Expanded(
+//                           child: RichText(
+//                             text: TextSpan(
+//                               style: const TextStyle(color: Colors.black),
+//                               children: [
+//                                 const TextSpan(text: "By signing up I agree to the "),
+//                                 TextSpan(
+//                                   recognizer: TapGestureRecognizer()
+//                                     ..onTap = () => Get.toNamed(AppRoutes.terms),
+//                                   text: "Terms of use",
+//                                   style: TextStyle(color: Colors.teal[800]),
+//                                 ),
+//                                 TextSpan(text: " and ".tr),
+//                                 TextSpan(
+//                                   text: "Privacy Policy.".tr,
+//                                   style: TextStyle(color: Colors.teal[800]),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                     const SizedBox(height: 20),
+//                     Obx(() => SizedBox(
+//                           width: double.infinity,
+//                           child: ElevatedButton(
+//                             style: ElevatedButton.styleFrom(
+//                               backgroundColor: AppColors.primary,
+//                               foregroundColor: AppColors.activebgclr,
+//                               padding: const EdgeInsets.symmetric(vertical: 16),
+//                               shape: RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(8),
+//                               ),
+//                             ),
+//                             onPressed: controller.isLoading.value
+//                                 ? null
+//                                 : () => controller.login(),
+//                             child: controller.isLoading.value
+//                                 ? const CircularProgressIndicator(
+//                                     color: Colors.white,
+//                                   )
+//                                 : const Text(
+//                                     "Login",
+//                                     style: TextStyle(fontSize: 16),
+//                                   ),
+//                           ),
+//                         )),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
 import 'package:dropgo/app/constants/colors.dart';
 import 'package:dropgo/app/controllers/auth_controller.dart';
 import 'package:dropgo/app/routes/app_routes.dart';
@@ -70,7 +259,7 @@ class LoginScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.only(
-                  top: size.height * 0.55,
+                  top: size.height * 0.5,
                   left: 24,
                   right: 24,
                   bottom: 40,
@@ -78,15 +267,35 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Simplified Title
+                    const Text(
+                      "Sign In",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
                     TextField(
                       controller: controller.usernameController,
                       style: const TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         hintText: 'Enter your username'.tr,
+                        filled: true,
+                        fillColor: Colors.grey[50],
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.grey[300]!),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.grey[300]!),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -95,20 +304,33 @@ class LoginScreen extends StatelessWidget {
                           style: const TextStyle(color: Colors.black),
                           obscureText: !controller.isPasswordVisible.value,
                           decoration: InputDecoration(
-                            hintText: 'Enter your password',
+                            hintText: 'Enter your password'.tr,
+                            filled: true,
+                            fillColor: Colors.grey[50],
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.grey[300]!),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: Colors.grey[300]!),
                             ),
                             suffixIcon: IconButton(
-                              icon: Icon(controller.isPasswordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
+                              icon: Icon(
+                                controller.isPasswordVisible.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey[600],
+                              ),
                               onPressed: controller.togglePasswordVisibility,
                             ),
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
                           ),
                         )),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
@@ -118,31 +340,47 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.teal[700],
                             fontWeight: FontWeight.w500,
+                            fontSize: 14,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Checkbox(value: true, onChanged: (val) {}),
+                        Checkbox(
+                          value: true,
+                          onChanged: (val) {},
+                          activeColor: Colors.teal[700],
+                        ),
                         Expanded(
                           child: RichText(
                             text: TextSpan(
-                              style: const TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 13,
+                              ),
                               children: [
-                                const TextSpan(text: "By signing up I agree to the "),
+                                const TextSpan(
+                                    text: "By signing up I agree to the "),
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
-                                    ..onTap = () => Get.toNamed(AppRoutes.terms),
+                                    ..onTap =
+                                        () => Get.toNamed(AppRoutes.terms),
                                   text: "Terms of use",
-                                  style: TextStyle(color: Colors.teal[800]),
+                                  style: TextStyle(
+                                    color: Colors.teal[800],
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 TextSpan(text: " and ".tr),
                                 TextSpan(
                                   text: "Privacy Policy.".tr,
-                                  style: TextStyle(color: Colors.teal[800]),
+                                  style: TextStyle(
+                                    color: Colors.teal[800],
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ],
                             ),
@@ -159,7 +397,7 @@ class LoginScreen extends StatelessWidget {
                               foregroundColor: AppColors.activebgclr,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             onPressed: controller.isLoading.value
@@ -170,8 +408,11 @@ class LoginScreen extends StatelessWidget {
                                     color: Colors.white,
                                   )
                                 : const Text(
-                                    "Login",
-                                    style: TextStyle(fontSize: 16),
+                                    "Sign In",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                           ),
                         )),

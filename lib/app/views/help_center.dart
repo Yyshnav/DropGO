@@ -173,13 +173,13 @@ class HelpCenterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Responsive.h(context, 2),
-            ContactTile(
-              icon: 'assets/images/chatt.png',
-              label: 'Chat'.tr,
-              onTap: () {
-                Get.toNamed(AppRoutes.chat);
-              },
-            ),
+            // ContactTile(
+            //   icon: 'assets/images/chatt.png',
+            //   label: 'Chat'.tr,
+            //   onTap: () {
+            //     Get.toNamed(AppRoutes.chat);
+            //   },
+            // ),
             const SizedBox(height: 12),
             ContactTile(
               icon: 'assets/images/whatsapp.png',

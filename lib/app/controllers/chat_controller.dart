@@ -591,6 +591,7 @@ class ChatController extends GetxController {
     super.onInit();
     _initRecorder();
     // CORRECTED: Initialize player in onInit
+    // await _player.setSubscriptionDuration(const Duration(milliseconds: 100));
     await _initPlayer();
     _loadHistory();
     _connectSocket();
@@ -629,11 +630,11 @@ class ChatController extends GetxController {
     _socket.onTyping = _handleTyping;
     _socket.onDone = () {
       isConnected.value = false;
-      Get.snackbar('Disconnected', 'WebSocket connection closed');
+      print('Disconnected,' 'WebSocket connection closed');
     };
     _socket.onError = (err) {
       isConnected.value = false;
-      Get.snackbar('WebSocket Error', err.toString());
+      print('WebSocket Error, ${err.toString()}');
     };
 
     _socket.connect(orderId: orderId, token: token);
@@ -874,9 +875,9 @@ class ChatController extends GetxController {
     }
   }
 
-  Future<void> playAudio(String path, String messageId) async {
-    print('parthhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh....................$path');
-    // CORRECTED: Stop any currently playing audio and initialize maps
+  Future<void> playAudio(String path, String messageId) async {  
+    // print('pathhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh....................$path');
+    
     if (_currentlyPlayingId != null && _currentlyPlayingId != messageId) {
       await stopAudio();
     }
@@ -895,6 +896,7 @@ class ChatController extends GetxController {
         Get.snackbar('Error', 'Failed to load audio file');
         return;
       }
+      await _player.setSubscriptionDuration(const Duration(milliseconds: 100));
 
       await _player.startPlayer(
         fromURI: audioFile.path,
@@ -910,10 +912,11 @@ class ChatController extends GetxController {
       // CORRECTED: Cancel existing subscription and update position/duration
       _positionSub?.cancel();
       _positionSub = _player.onProgress?.listen((e) {
-        positionMap[messageId]?.value = e.position;
-        durationMap[messageId]?.value = e.duration;
-        update(); // CORRECTED: Notify UI of progress updates
-      });
+  positionMap[messageId]?.value = e.position;
+  durationMap[messageId]?.value = e.duration;
+  // Remove update(); Obx listens to .value changes.
+});
+
 
       playingMap[messageId]?.value = true;
       pausedMap[messageId]?.value = false;

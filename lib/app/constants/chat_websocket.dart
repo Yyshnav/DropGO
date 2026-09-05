@@ -520,7 +520,7 @@ void connect({
   } 
   final uri = Uri(
     scheme: 'ws',
-    host: '192.168.1.66',
+    host: '192.168.1.36',
     port: 5000,
     path: '/ws/chat/$orderId/',
     queryParameters: {'token': effectiveToken},

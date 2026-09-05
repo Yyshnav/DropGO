@@ -10,7 +10,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 import 'dart:math';
-import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -47,13 +46,7 @@ class LocationController extends GetxController {
     super.onInit();
     _loadVehicleIcon();
     _startLocationUpdates();
-  //   Future.microtask(() async {
-    fetchLatestOrder();
-  //   // await fetchOrderDetails(orderId); // if needed
-  // });
-     _timer = Timer.periodic(Duration(seconds: 15), (_) {
-      fetchLatestOrder();
-    });
+    // Defer order fetching until map/view is ready (avoid triggering on app start/login)
   }
 
   // ✅ Launch Phone Call
@@ -305,6 +298,10 @@ Future<void> setDeliveryBoyCurrentLocation() async {
   _mapController = controller;
   fetchLatestOrder();
   _mapReady = true;
+  // Start periodic refresh only after map is ready
+  _timer ??= Timer.periodic(Duration(seconds: 15), (_) {
+    fetchLatestOrder();
+  });
   if (_routePending) {
     print("📍 Drawing pending polyline route");
     _debouncedGetPolylineRoute();

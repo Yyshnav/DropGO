@@ -22,7 +22,7 @@ var selectedPaymentType = "".obs;
 
       // Update status flags based on fetched data
       if (order.value != null) {
-        if (order.value!.status == "Accepted") {
+        if (order.value!.status == "ASSIGNED") {
           isPickedUp.value = true;
         }
         if (order.value!.status == "Delivered") {
@@ -46,7 +46,7 @@ var selectedPaymentType = "".obs;
       // Update local order status
       order.value!.status = status;
 
-      if (status == "ACCEPTED") {
+      if (status == "ASSIGNED") {
         isPickedUp.value = true;
       } else if (status == "DELIVERED") {
         isDelivered.value = true;
